@@ -18,10 +18,10 @@ Toolkits are organised by profession/domain. Profession-level toolkits contain
 technology-specific instruction files (for example, language conventions) that apply
 only to matching file types.
 
-| Toolkit | Contents |
-| --- | --- |
-| [`universal`](toolkits/universal) | Cross-cutting standards that apply to every repository: security and PII, British English, MOJ standards, development principles, naming, licensing, AI governance, and version control. |
-| [`software-engineering`](toolkits/software-engineering) | General coding standards, design (SOLID), testing, security, and CI/CD, plus language-specific instructions for Python (`**/*.py`) and Ruby (`**/*.rb`). |
+| Toolkit                                                 | Contents                                                                                                                                                                                                |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`universal`](toolkits/universal)                       | Cross-cutting standards that apply to every repository: security and PII, British English, MOJ standards, development principles, naming, licensing, AI governance, and version control.                |
+| [`software-engineering`](toolkits/software-engineering) | General coding standards, design (SOLID), testing, security, and CI/CD, plus language-specific instructions for Python (`**/*.py`) and Ruby (`**/*.rb`).                                                |
 | [`frontend-engineering`](toolkits/frontend-engineering) | Accessibility (WCAG 2.2 AA) and Government Service Manual guidance, plus technology-specific instructions for HTML/CSS (`**/*.{html,css,scss}`) and JavaScript/TypeScript (`**/*.{ts,tsx,js,jsx,vue}`). |
 
 Each toolkit is an APM package: an `apm.yml` manifest plus

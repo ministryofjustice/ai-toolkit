@@ -26,7 +26,7 @@ Code defensively when calling other services. Every HTTP call can error or hang 
 
 ## Other developers are users too
 
-If you have to explain how your code works, it's not clear enough. Comments explain *why*, not *how*. Commit messages: follow GDS guidance (e.g. `type(scope): description`). APIs need designing for usability. Don't pollute the global namespace.
+If you have to explain how your code works, it's not clear enough. Comments explain _why_, not _how_. Commit messages: follow GDS guidance (e.g. `type(scope): description`). APIs need designing for usability. Don't pollute the global namespace.
 
 ## Think smaller
 
