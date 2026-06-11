@@ -1,0 +1,21 @@
+{
+  "name": "ai-toolkit",
+  "image": "ghcr.io/ministryofjustice/devcontainer-base:latest",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:": {},
+    "ghcr.io/ministryofjustice/devcontainer-feature/apm:": {},
+    "ghcr.io/ministryofjustice/devcontainer-feature/astral:": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "EditorConfig.EditorConfig",
+        "GitHub.copilot-chat",
+        "GitHub.vscode-github-actions",
+        "GitHub.vscode-pull-request-github",
+        "streetsidesoftware.code-spell-checker"
+      ]
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/post-create.sh"
+}
