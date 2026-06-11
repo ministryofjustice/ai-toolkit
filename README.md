@@ -29,7 +29,61 @@ Each toolkit is an APM package: an `apm.yml` manifest plus
 
 ## Setup Instructions
 
-To consume Agent Packages defined in this repository:
+These toolkits are consumed with [APM (Agent Package Manager)](https://github.com/danielmeppiel/apm).
+
+### 1. Install APM
+
+**macOS / Linux:**
+
+```bash
+curl -sSL https://aka.ms/apm-unix | sh
+```
+
+**Windows (PowerShell):**
+
+```powershell
+irm https://aka.ms/apm-windows | iex
+```
+
+Verify the installation:
+
+```bash
+apm --version
+```
+
+For Homebrew, Scoop, pip, or other install methods, see the [APM installation guide](https://microsoft.github.io/apm/getting-started/installation/).
+
+### 2. Declare the toolkits as dependencies
+
+Create an `apm.yml` in the root of your repository (or run `apm init`) and add the toolkits you want as dependencies:
+
+```yaml
+name: <name>
+version: 1.0.0
+description: APM project for <name>
+author: <author>
+targets:
+  - copilot
+dependencies:
+  apm:
+    - ministryofjustice/ai-toolkit/toolkits/universal#1.0.0
+    - ministryofjustice/ai-toolkit/toolkits/software-engineering#1.0.0
+```
+
+### 3. Install the dependencies
+
+```bash
+apm install
+```
+
+APM resolves the toolkits, pins them in `apm.lock.yaml`, and deploys their
+instructions into the detected harness (for example `.github/` for Copilot).
+
+## Using a development container
+
+If your repository uses [development containers](https://containers.dev/), you can
+install APM automatically as part of your container setup instead of installing the
+CLI by hand.
 
 1. [Install](https://github.com/ministryofjustice/.devcontainer#adding-a-development-container-to-a-project) the Ministry of Justice [Development Container](https://github.com/ministryofjustice/.devcontainer) in your repository.
 1. Add the APM feature to your `.devcontainer/devcontainer.json`:
@@ -42,24 +96,11 @@ To consume Agent Packages defined in this repository:
    }
    ```
 
-1. Create an `apm.yml` in the root of your repository to declare the toolkits you want as dependencies:
-
-   ```yaml
-   name: <name>
-   version: 1.0.0
-   description: APM project for <name>
-   author: <author>
-   targets:
-     - copilot
-   dependencies:
-     apm:
-       - ministryofjustice/ai-toolkit/toolkits/universal#1.0.0
-       - ministryofjustice/ai-toolkit/toolkits/software-engineering#1.0.0
-   ```
-
-1. Add `apm install` to your `.devcontainer/post-create.sh` script:
+1. Add `apm install` to your `.devcontainer/post-create.sh` script so dependencies are installed when the container is created:
 
    ```bash
    #!/usr/bin/env bash
    apm install
    ```
+
+You still declare the toolkits in `apm.yml` exactly as shown above.
