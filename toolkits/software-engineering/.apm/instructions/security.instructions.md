@@ -9,5 +9,4 @@ description: Application security standards for engineering work.
 - Encrypt sensitive data at rest (AES 256) and in transit (TLS).
 - Use parameterised queries to prevent SQL injection.
 - Validate all relevant inputs, both server and client side.
-
-> Source: [Justice Digital software engineering standards](https://technical-guidance.service.justice.gov.uk/documentation/standards/justice-digital-software-engineering-standards.html)
+- Don't implement your own cryptography; use established, well-reviewed libraries.

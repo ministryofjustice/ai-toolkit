@@ -9,5 +9,3 @@ applyTo: "**/*.{html,css,scss}"
 - Minimise `!important`; maintain a sensible specificity hierarchy.
 - Avoid inline styles; use external stylesheets or CSS-in-JS.
 - Keep CSS modular (e.g. BEM, CSS Modules, Tailwind).
-
-> Source: [Justice Digital front end engineering standards](https://technical-guidance.service.justice.gov.uk/documentation/standards/justice-digital-front-end-engineering-standards.html)

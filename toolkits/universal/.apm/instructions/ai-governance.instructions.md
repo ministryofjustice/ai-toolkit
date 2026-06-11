@@ -8,5 +8,3 @@ description: MOJ governance rules for using AI tooling when generating code.
 - No ingestion of personal data or sensitive security data by AI unless TDA-approved.
 - Review all AI-generated outputs for accuracy; apply in line with organisational guidance.
 - Human in the loop: maintain clear accountability, document AI use, and keep transparency and auditability.
-
-> Source: [MOJ Engineering AI Governance Framework](https://technical-guidance.service.justice.gov.uk/documentation/governance/ai-governance-framework.html)

@@ -8,5 +8,3 @@ description: MOJ licensing and copyright requirements for software and code.
 - Use the copyright line: `Copyright (c) YYYY Crown Copyright (Ministry of Justice)`.
 - Use UK spelling "Licence" where preferred.
 - When reusing others' work, provide proper attribution in the licence file.
-
-> Source: [Licensing software or code](https://technical-guidance.service.justice.gov.uk/documentation/standards/licencing-software-or-code.html)

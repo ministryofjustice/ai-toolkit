@@ -10,5 +10,3 @@ applyTo: "**/*.{html,tsx,jsx,vue,css}"
 - Provide alt text for images, ARIA for dynamic elements, keyboard navigation, and focus management.
 - Test with screen readers and automated tools (Axe, Pa11y, WAVE).
 - Support browser zoom to 400%; use logical headings, meaningful link text, descriptive page titles, and sufficient colour contrast.
-
-> Source: [Justice Digital front end engineering standards](https://technical-guidance.service.justice.gov.uk/documentation/standards/justice-digital-front-end-engineering-standards.html)

@@ -13,5 +13,3 @@ applyTo: "**/*.rb"
 ## Meta-programming with caution
 
 - Use meta-programming with extreme caution; it makes code harder to read and debug, and can cause performance issues (e.g. method cache purging).
-
-> Source: [Development Principles](https://technical-guidance.service.justice.gov.uk/documentation/principles/development-principles.html)

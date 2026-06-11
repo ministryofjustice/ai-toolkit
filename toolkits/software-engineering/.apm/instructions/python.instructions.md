@@ -15,4 +15,6 @@ applyTo: "**/*.py"
 - Follow [PEP 8](https://peps.python.org/pep-0008/).
 - Consider the Zen of Python: readability, explicit over implicit, simple over complex.
 
-> Source: [Development Principles](https://technical-guidance.service.justice.gov.uk/documentation/principles/development-principles.html)
+## Concurrency
+
+- Prefer process-based concurrency over threading unless there is a measured reason to use threads.

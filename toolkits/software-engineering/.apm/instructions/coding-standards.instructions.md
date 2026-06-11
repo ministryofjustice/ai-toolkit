@@ -10,5 +10,3 @@ description: General coding standards for day-to-day software development.
 - Keep the maximum line length to 120 characters.
 - Use meaningful names for variables, classes, and methods.
 - Follow language-specific style guides (e.g. PEP 8 for Python, Google Java style for Java).
-
-> Source: [Justice Digital software engineering standards](https://technical-guidance.service.justice.gov.uk/documentation/standards/justice-digital-software-engineering-standards.html)
