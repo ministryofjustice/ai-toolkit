@@ -1,0 +1,11 @@
+name: universal-toolkit
+version: 1.0.0
+description: Universal Toolkit
+author: Ministry of Justice
+targets:
+  - copilot
+dependencies:
+  apm: []
+  mcp: []
+includes: auto
+scripts: {}
