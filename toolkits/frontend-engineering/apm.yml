@@ -1,0 +1,11 @@
+name: frontend-engineering-toolkit
+version: 1.0.0
+description: Frontend Engineering Toolkit
+author: Ministry of Justice
+targets:
+  - copilot
+dependencies:
+  apm: []
+  mcp: []
+includes: auto
+scripts: {}

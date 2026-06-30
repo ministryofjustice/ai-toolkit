@@ -3,5 +3,20 @@
   "version": "0.2",
   "language": "en-GB",
   "ignorePaths": [".gitignore"],
-  "words": ["cooldown", "ministryofjustice", "octo", "openssf", "zizmor"]
+  "words": [
+    "CCCD",
+    "cicd",
+    "cooldown",
+    "DOMIS",
+    "Liskov",
+    "ministryofjustice",
+    "octo",
+    "openssf",
+    "Peoplefinder",
+    "SonarQube",
+    "toolkits",
+    "unhandleable",
+    "WCAG",
+    "zizmor"
+  ]
 }

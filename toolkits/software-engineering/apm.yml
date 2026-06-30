@@ -1,0 +1,11 @@
+name: software-engineering-toolkit
+version: 1.0.0
+description: Software Engineering Toolkit
+author: Ministry of Justice
+targets:
+  - copilot
+dependencies:
+  apm: []
+  mcp: []
+includes: auto
+scripts: {}
