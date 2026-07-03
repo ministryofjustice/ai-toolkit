@@ -25,7 +25,7 @@ only to matching file types.
 | [`frontend-engineering`](toolkits/frontend-engineering) | Accessibility (WCAG 2.2 AA) and Government Service Manual guidance, plus technology-specific instructions for HTML/CSS (`**/*.{html,css,scss}`) and JavaScript/TypeScript (`**/*.{ts,tsx,js,jsx,vue}`). |
 
 Each toolkit is an APM package: an `apm.yml` manifest plus
-`.apm/instructions/*.instructions.md` files. See each toolkit's README (linked
+`.apm/instructions/*.instructions.md` files. See each toolkit's readme (linked
 above) for the full list of instructions and their MoJ sources.
 
 ## Setup Instructions

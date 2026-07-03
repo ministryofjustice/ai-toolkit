@@ -2,7 +2,7 @@
 
 General software engineering standards plus language-specific instructions that
 apply only to matching file types. Distributed as an APM package; see the
-[repository README](../../README.md) for setup instructions.
+[repository readme](../../README.md) for setup instructions.
 
 ## Instructions
 

@@ -2,7 +2,7 @@
 
 Cross-cutting standards that apply to every repository, regardless of language or
 framework. Distributed as an APM package; see the
-[repository README](../../README.md) for setup instructions.
+[repository readme](../../README.md) for setup instructions.
 
 ## Instructions
 
@@ -24,7 +24,7 @@ These instructions are derived from MoJ Technical Guidance and the
 
 - [MoJ Technical Guidance](https://technical-guidance.service.justice.gov.uk/)
 - [Justice Digital software engineering standards](https://technical-guidance.service.justice.gov.uk/documentation/standards/justice-digital-software-engineering-standards.html)
-- [Justice Digital front end engineering standards](https://technical-guidance.service.justice.gov.uk/documentation/standards/justice-digital-front-end-engineering-standards.html)
+- [Justice Digital frontend engineering standards](https://technical-guidance.service.justice.gov.uk/documentation/standards/justice-digital-front-end-engineering-standards.html)
 - [Development Principles](https://technical-guidance.service.justice.gov.uk/documentation/principles/development-principles.html)
 - [Frontend Development Principles](https://technical-guidance.service.justice.gov.uk/documentation/principles/frontend-development-principles.html)
 - [Naming things](https://technical-guidance.service.justice.gov.uk/documentation/standards/naming-things.html)

@@ -7,5 +7,5 @@ applyTo: "**/*.{html,css,scss}"
 
 - Use semantic HTML and accessibility attributes (ARIA).
 - Minimise `!important`; maintain a sensible specificity hierarchy.
-- Avoid inline styles; use external stylesheets or CSS-in-JS.
+- Avoid inline styles; use external style sheets or CSS in JS.
 - Keep CSS modular (e.g. BEM, CSS Modules, Tailwind).
