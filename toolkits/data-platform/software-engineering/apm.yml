@@ -1,0 +1,11 @@
+name: data-platform-software-engineering
+version: 1.0.0
+description: Software Engineering Toolkit
+author: Data Platform Engineering
+targets:
+  - copilot
+dependencies:
+  apm: []
+  mcp: []
+includes: auto
+scripts: {}
