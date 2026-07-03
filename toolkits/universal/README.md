@@ -6,16 +6,16 @@ framework. Distributed as an APM package; see the
 
 ## Instructions
 
-| File | Source |
-| --- | --- |
-| [`security-and-pii`](.apm/instructions/security-and-pii.instructions.md) | [MoJ Technical Guidance](https://technical-guidance.service.justice.gov.uk/) |
-| [`language`](.apm/instructions/language.instructions.md) | MoJ AI Coding Environment convention (British English) |
-| [`ministryofjustice`](.apm/instructions/ministryofjustice.instructions.md) | [ministryofjustice/.github](https://github.com/ministryofjustice/.github) |
-| [`development-principles`](.apm/instructions/development-principles.instructions.md) | [Development Principles](https://technical-guidance.service.justice.gov.uk/documentation/principles/development-principles.html) |
-| [`naming`](.apm/instructions/naming.instructions.md) | [Naming things](https://technical-guidance.service.justice.gov.uk/documentation/standards/naming-things.html) |
-| [`licensing`](.apm/instructions/licensing.instructions.md) | [Licensing software or code](https://technical-guidance.service.justice.gov.uk/documentation/standards/licencing-software-or-code.html) |
-| [`ai-governance`](.apm/instructions/ai-governance.instructions.md) | [MOJ Engineering AI Governance Framework](https://technical-guidance.service.justice.gov.uk/documentation/governance/ai-governance-framework.html) |
-| [`version-control`](.apm/instructions/version-control.instructions.md) | [Justice Digital software engineering standards](https://technical-guidance.service.justice.gov.uk/documentation/standards/justice-digital-software-engineering-standards.html) |
+| File                                                                                 | Source                                                                                                                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`security-and-pii`](.apm/instructions/security-and-pii.instructions.md)             | [MoJ Technical Guidance](https://technical-guidance.service.justice.gov.uk/)                                                                                                    |
+| [`language`](.apm/instructions/language.instructions.md)                             | MoJ AI Coding Environment convention (British English)                                                                                                                          |
+| [`ministryofjustice`](.apm/instructions/ministryofjustice.instructions.md)           | [ministryofjustice/.github](https://github.com/ministryofjustice/.github)                                                                                                       |
+| [`development-principles`](.apm/instructions/development-principles.instructions.md) | [Development Principles](https://technical-guidance.service.justice.gov.uk/documentation/principles/development-principles.html)                                                |
+| [`naming`](.apm/instructions/naming.instructions.md)                                 | [Naming things](https://technical-guidance.service.justice.gov.uk/documentation/standards/naming-things.html)                                                                   |
+| [`licensing`](.apm/instructions/licensing.instructions.md)                           | [Licensing software or code](https://technical-guidance.service.justice.gov.uk/documentation/standards/licencing-software-or-code.html)                                         |
+| [`ai-governance`](.apm/instructions/ai-governance.instructions.md)                   | [MOJ Engineering AI Governance Framework](https://technical-guidance.service.justice.gov.uk/documentation/governance/ai-governance-framework.html)                              |
+| [`version-control`](.apm/instructions/version-control.instructions.md)               | [Justice Digital software engineering standards](https://technical-guidance.service.justice.gov.uk/documentation/standards/justice-digital-software-engineering-standards.html) |
 
 ## Canonical sources
 
