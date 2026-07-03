@@ -18,19 +18,19 @@ that apply only to matching file types.
 
 ### AI Coding Standards family
 
-| Toolkit                                                                      | Contents                                                                                                                                                                                                |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`universal`](toolkits/aicodingstandards/universal)                         | Cross-cutting standards that apply to every repository: security and PII, British English, MOJ standards, development principles, naming, licensing, AI governance, and version control.                |
-| [`software-engineering`](toolkits/aicodingstandards/software-engineering)   | General coding standards, design (SOLID), testing, security, and CI/CD, plus language-specific instructions for Python (`**/*.py`) and Ruby (`**/*.rb`).                                                |
-| [`frontend-engineering`](toolkits/aicodingstandards/frontend-engineering)   | Accessibility (WCAG 2.2 AA) and Government Service Manual guidance, plus technology-specific instructions for HTML/CSS (`**/*.{html,css,scss}`) and JavaScript/TypeScript (`**/*.{ts,tsx,js,jsx,vue}`). |
+| Toolkit                                                                   | Contents                                                                                                                                                                                                |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`universal`](toolkits/aicodingstandards/universal)                       | Cross-cutting standards that apply to every repository: security and PII, British English, MOJ standards, development principles, naming, licensing, AI governance, and version control.                |
+| [`software-engineering`](toolkits/aicodingstandards/software-engineering) | General coding standards, design (SOLID), testing, security, and CI/CD, plus language-specific instructions for Python (`**/*.py`) and Ruby (`**/*.rb`).                                                |
+| [`frontend-engineering`](toolkits/aicodingstandards/frontend-engineering) | Accessibility (WCAG 2.2 AA) and Government Service Manual guidance, plus technology-specific instructions for HTML/CSS (`**/*.{html,css,scss}`) and JavaScript/TypeScript (`**/*.{ts,tsx,js,jsx,vue}`). |
 
 ### Data Platform family
 
-| Toolkit                                                                    | Contents                                                                                                      |
-| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| [`universal`](toolkits/data-platform/universal)                           | Data Platform universal instructions.                                                                         |
-| [`software-engineering`](toolkits/data-platform/software-engineering)     | Data Platform software engineering instructions, including Python and Django guidance.                       |
-| [`platform-engineering`](toolkits/data-platform/platform-engineering)     | Data Platform platform engineering instructions, including commit, GitHub, Kubernetes, and Terraform topics. |
+| Toolkit                                                               | Contents                                                                                                     |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| [`universal`](toolkits/data-platform/universal)                       | Data Platform universal instructions.                                                                        |
+| [`software-engineering`](toolkits/data-platform/software-engineering) | Data Platform software engineering instructions, including Python and Django guidance.                       |
+| [`platform-engineering`](toolkits/data-platform/platform-engineering) | Data Platform platform engineering instructions, including commit, GitHub, Kubernetes, and Terraform topics. |
 
 Each toolkit is an APM package: an `apm.yml` manifest plus
 `.apm/instructions/*.instructions.md` files. See each toolkit directory for the
