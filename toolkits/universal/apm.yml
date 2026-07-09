@@ -6,6 +6,10 @@ targets:
   - copilot
 dependencies:
   apm: []
-  mcp: []
+  mcp:
+    - name: github
+      registry: false
+      transport: http
+      url: https://api.githubcopilot.com/mcp/
 includes: auto
 scripts: {}
