@@ -33,7 +33,9 @@ above) for the full list of instructions and their MoJ sources.
 These toolkits are consumed with [APM (Agent Package Manager)](https://github.com/danielmeppiel/apm).
 
 ### 1. Install APM
+
 <!-- jscpd:ignore-start -->
+
 **macOS / Linux:**
 
 ```bash
@@ -70,7 +72,9 @@ dependencies:
     - ministryofjustice/ai-toolkit/toolkits/universal#1.0.0
     - ministryofjustice/ai-toolkit/toolkits/software-engineering#1.0.0
 ```
+
 <!-- jscpd:ignore-end -->
+
 ### 3. Install the dependencies
 
 ```bash
