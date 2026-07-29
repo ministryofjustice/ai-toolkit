@@ -33,7 +33,7 @@ above) for the full list of instructions and their MoJ sources.
 These toolkits are consumed with [APM (Agent Package Manager)](https://github.com/danielmeppiel/apm).
 
 ### 1. Install APM
-
+<!-- jscpd:ignore-start -->
 **macOS / Linux:**
 
 ```bash
@@ -51,6 +51,8 @@ Verify the installation:
 ```bash
 apm --version
 ```
+
+<!-- jscpd:ignore-end -->
 
 For Homebrew, Scoop, pip, or other install methods, see the [APM installation guide](https://microsoft.github.io/apm/getting-started/installation/).
 
