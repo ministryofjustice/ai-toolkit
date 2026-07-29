@@ -52,8 +52,6 @@ Verify the installation:
 apm --version
 ```
 
-<!-- jscpd:ignore-end -->
-
 For Homebrew, Scoop, pip, or other install methods, see the [APM installation guide](https://microsoft.github.io/apm/getting-started/installation/).
 
 ### 2. Declare the toolkits as dependencies
@@ -72,7 +70,7 @@ dependencies:
     - ministryofjustice/ai-toolkit/toolkits/universal#1.0.0
     - ministryofjustice/ai-toolkit/toolkits/software-engineering#1.0.0
 ```
-
+<!-- jscpd:ignore-end -->
 ### 3. Install the dependencies
 
 ```bash
