@@ -5,5 +5,6 @@ rules:
   comments: disable
   line-length:
     level: warning
+    allow-non-breakable-words: true
     allow-non-breakable-inline-mappings: true
   truthy: disable
