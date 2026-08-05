@@ -19,4 +19,13 @@ repos:
     hooks:
       - id: zizmor
 
+  - repo: local
+    hooks:
+      - id: update-readme-toolkits
+        name: update-readme-toolkits
+        entry: scripts/update-readme-toolkits.sh
+        language: system
+        pass_filenames: false
+        files: ^toolkits/|^README\.md$
+
 exclude: .devcontainer/devcontainer-lock.json

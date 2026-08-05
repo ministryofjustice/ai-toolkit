@@ -1,0 +1,180 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+README_PATH="$ROOT_DIR/README.md"
+TOOLKITS_DIR="$ROOT_DIR/toolkits"
+
+START_MARKER="<!-- BEGIN GENERATED TOOLKITS -->"
+END_MARKER="<!-- END GENERATED TOOLKITS -->"
+
+if [[ ! -f "$README_PATH" ]]; then
+  echo "README not found at $README_PATH" >&2
+  exit 1
+fi
+
+if [[ ! -d "$TOOLKITS_DIR" ]]; then
+  echo "Toolkits directory not found at $TOOLKITS_DIR" >&2
+  exit 1
+fi
+
+title_case() {
+  local value="$1"
+  echo "$value" | tr '-' ' ' | awk '{
+    for (i = 1; i <= NF; i++) {
+      $i = toupper(substr($i, 1, 1)) substr($i, 2)
+    }
+    print
+  }'
+}
+
+slug_words() {
+  local value="$1"
+  echo "$value" | tr '-' ' '
+}
+
+extract_description() {
+  local manifest_path="$1"
+  local description
+
+  description="$(awk '/^description:[[:space:]]*/{
+    sub(/^description:[[:space:]]*/, "", $0)
+    print
+    exit
+  }' "$manifest_path" | sed -E 's/^"(.*)"$/\1/; s/^'"'"'(.*)'"'"'$/\1/')"
+
+  echo "$description"
+}
+
+escape_pipes() {
+  local value="$1"
+  echo "$value" | sed 's/|/\\|/g'
+}
+
+normalize_description() {
+  local family_name="$1"
+  local family_display="$2"
+  local toolkit_name="$3"
+  local raw_description="$4"
+  local description
+
+  description="$(echo "$raw_description" | sed -E 's/[[:space:]]+$//')"
+
+  if [[ -n "$description" ]]; then
+    description="$(echo "$description" | sed -E 's/[[:space:]]+[Tt]oolkit$//')"
+    description="$(echo "$description" | sed -E 's/[[:space:]]+[Ii]nstructions?$//')"
+    description="$(echo "$description" | sed -E 's/[[:space:]]+$//')"
+  fi
+
+  if [[ -z "$description" ]]; then
+    if [[ "$toolkit_name" == "$family_name" ]]; then
+      echo "$family_display instructions."
+    else
+      echo "$family_display $(slug_words "$toolkit_name") instructions."
+    fi
+    return
+  fi
+
+  if [[ "$toolkit_name" == "$family_name" ]]; then
+    echo "$description instructions."
+    return
+  fi
+
+  if [[ "$description" == "$family_display"* ]]; then
+    echo "$description instructions."
+    return
+  fi
+
+  echo "$family_display $(echo "$description" | tr '[:upper:]' '[:lower:]') instructions."
+}
+
+generate_rows_for_family() {
+  local family_dir="$1"
+  local family_name
+  local family_display
+  local heading
+  local manifests
+
+  family_name="$(basename "$family_dir")"
+  family_display="$(title_case "$family_name")"
+  manifests="$(find "$family_dir" -mindepth 1 -maxdepth 2 -type f -name 'apm.yml' | sort || true)"
+
+  if [[ -z "$manifests" ]]; then
+    return 0
+  fi
+
+  if [[ "$family_name" == "universal" ]]; then
+    heading="### ${family_display} toolkit"
+  else
+    heading="### ${family_display} family"
+  fi
+
+  echo "$heading"
+  echo
+  echo "| Toolkit | Contents |"
+  echo "| ------- | -------- |"
+
+  while IFS= read -r manifest; do
+    [[ -z "$manifest" ]] && continue
+
+    local toolkit_dir
+    local rel_toolkit_dir
+    local toolkit_name
+    local toolkit_display
+    local description
+
+    toolkit_dir="$(dirname "$manifest")"
+    rel_toolkit_dir="${toolkit_dir#"$ROOT_DIR"/}"
+    toolkit_name="$(basename "$toolkit_dir")"
+    toolkit_display="$toolkit_name"
+
+    description="$(normalize_description "$family_name" "$family_display" "$toolkit_name" "$(extract_description "$manifest")")"
+
+    description="$(escape_pipes "$description")"
+
+    echo "| [$toolkit_display]($rel_toolkit_dir) | $description |"
+  done <<< "$manifests"
+
+  echo
+}
+
+GENERATED_CONTENT_FILE="$(mktemp)"
+trap 'rm -f "$GENERATED_CONTENT_FILE" "$UPDATED_README_FILE"' EXIT
+
+if ! grep -q "^${START_MARKER}$" "$README_PATH" || ! grep -q "^${END_MARKER}$" "$README_PATH"; then
+  echo "README is missing generated toolkit markers." >&2
+  exit 1
+fi
+
+{
+  family_dirs="$(find "$TOOLKITS_DIR" -mindepth 1 -maxdepth 1 -type d | sort)"
+  while IFS= read -r family_dir; do
+    [[ -z "$family_dir" ]] && continue
+    generate_rows_for_family "$family_dir"
+  done <<< "$family_dirs"
+} > "$GENERATED_CONTENT_FILE"
+
+UPDATED_README_FILE="$(mktemp)"
+awk -v start="$START_MARKER" -v end="$END_MARKER" -v generated="$GENERATED_CONTENT_FILE" '
+  $0 == start {
+    print
+    while ((getline line < generated) > 0) {
+      print line
+    }
+    close(generated)
+    skip = 1
+    next
+  }
+  $0 == end {
+    skip = 0
+    print
+    next
+  }
+  skip != 1 {
+    print
+  }
+' "$README_PATH" > "$UPDATED_README_FILE"
+
+mv "$UPDATED_README_FILE" "$README_PATH"
+
+echo "Updated toolkit sections in README.md"

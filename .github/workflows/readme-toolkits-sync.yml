@@ -1,0 +1,57 @@
+---
+name: README Toolkits Sync
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - README.md
+      - scripts/update-readme-toolkits.sh
+      - toolkits/**
+  push:
+    branches:
+      - main
+    paths:
+      - README.md
+      - scripts/update-readme-toolkits.sh
+      - toolkits/**
+
+permissions:
+  contents: read
+
+jobs:
+  readme-toolkits-sync:
+    name: README toolkits sync
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Validate generated markers exist in README
+        run: |
+          if ! grep -q '^<!-- BEGIN GENERATED TOOLKITS -->$' README.md; then
+            echo "README.md is missing the BEGIN generated marker."
+            exit 1
+          fi
+
+          if ! grep -q '^<!-- END GENERATED TOOLKITS -->$' README.md; then
+            echo "README.md is missing the END generated marker."
+            exit 1
+          fi
+
+      - name: Regenerate README toolkit section
+        run: bash scripts/update-readme-toolkits.sh
+
+      - name: Fail if README is out of date
+        run: |
+          if ! git diff --quiet -- README.md; then
+            echo "README toolkit section is out of date with toolkits directory content."
+            echo "Run: bash scripts/update-readme-toolkits.sh"
+            echo
+            git --no-pager diff -- README.md
+            exit 1
+          fi
