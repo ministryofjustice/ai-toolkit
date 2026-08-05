@@ -116,7 +116,6 @@ generate_rows_for_family() {
   local family_dir="$1"
   local family_name
   local family_display
-  local heading
   local manifests
 
   family_name="$(basename "$family_dir")"
@@ -126,17 +125,6 @@ generate_rows_for_family() {
   if [[ -z "$manifests" ]]; then
     return 0
   fi
-
-  if [[ "$family_name" == "universal" ]]; then
-    heading="### ${family_display} toolkit"
-  else
-    heading="### ${family_display} family"
-  fi
-
-  echo "$heading"
-  echo
-  echo "| Toolkit | Contents |"
-  echo "| ------- | -------- |"
 
   while IFS= read -r manifest; do
     [[ -z "$manifest" ]] && continue
@@ -156,10 +144,8 @@ generate_rows_for_family() {
 
     description="$(escape_pipes "$description")"
 
-    echo "| [$toolkit_display]($rel_toolkit_dir) | $description |"
+    echo "| $family_display | [$toolkit_display]($rel_toolkit_dir) | $description |"
   done <<< "$manifests"
-
-  echo
 }
 
 GENERATED_CONTENT_FILE="$(mktemp)"
@@ -171,7 +157,15 @@ if ! grep -q "^${START_MARKER}$" "$README_PATH" || ! grep -q "^${END_MARKER}$" "
 fi
 
 {
-  family_dirs="$(find "$TOOLKITS_DIR" -mindepth 1 -maxdepth 1 -type d | sort)"
+  echo "| Team | Toolkit | Contents |"
+  echo "| ---- | ------- | -------- |"
+
+  universal_dir="$TOOLKITS_DIR/universal"
+  if [[ -d "$universal_dir" ]]; then
+    generate_rows_for_family "$universal_dir"
+  fi
+
+  family_dirs="$(find "$TOOLKITS_DIR" -mindepth 1 -maxdepth 1 -type d ! -name 'universal' | sort)"
   while IFS= read -r family_dir; do
     [[ -z "$family_dir" ]] && continue
     generate_rows_for_family "$family_dir"
