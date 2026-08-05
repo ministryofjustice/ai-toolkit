@@ -42,6 +42,8 @@ These toolkits are consumed with [APM (Agent Package Manager)](https://github.co
 
 ### 1. Install APM
 
+<!-- jscpd:ignore-start -->
+
 **macOS / Linux:**
 
 ```bash
@@ -81,6 +83,8 @@ dependencies:
     - ministryofjustice/ai-toolkit/toolkits/aicodingstandards/universal#1.0.0
     - ministryofjustice/ai-toolkit/toolkits/aicodingstandards/software-engineering#1.0.0
 ```
+
+<!-- jscpd:ignore-end -->
 
 ### 3. Install the dependencies
 
