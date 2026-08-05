@@ -1,7 +1,7 @@
-name: universal-toolkit
+name: universal
 version: 1.0.0
 description: Universal Toolkit
-author: Ministry of Justice
+author: Engineering AI Enablement
 targets:
   - copilot
 dependencies:
