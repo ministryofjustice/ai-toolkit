@@ -49,7 +49,8 @@ jobs:
       - name: Fail if README is out of date
         run: |
           if ! git diff --quiet -- README.md; then
-            echo "README toolkit section is out of date with toolkits directory content."
+            echo "README toolkit section is out of date"
+            echo "with toolkits directory content."
             echo "Run: bash scripts/update-readme-toolkits.sh"
             echo
             git --no-pager diff -- README.md

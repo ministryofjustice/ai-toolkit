@@ -41,14 +41,30 @@ extract_description() {
     sub(/^description:[[:space:]]*/, "", $0)
     print
     exit
-  }' "$manifest_path" | sed -E 's/^"(.*)"$/\1/; s/^'"'"'(.*)'"'"'$/\1/')"
+  }' "$manifest_path")"
+
+  if [[ "$description" == \"*\" && "$description" == *\" ]]; then
+    description="${description:1:${#description}-2}"
+  elif [[ "$description" == "'"*"'" ]]; then
+    description="${description:1:${#description}-2}"
+  fi
 
   echo "$description"
 }
 
 escape_pipes() {
   local value="$1"
-  echo "$value" | sed 's/|/\\|/g'
+  echo "${value//|/\\|}"
+}
+
+trim_trailing_whitespace() {
+  local value="$1"
+
+  while [[ "$value" == *[[:space:]] ]]; do
+    value="${value%[[:space:]]}"
+  done
+
+  echo "$value"
 }
 
 normalize_description() {
@@ -58,12 +74,20 @@ normalize_description() {
   local raw_description="$4"
   local description
 
-  description="$(echo "$raw_description" | sed -E 's/[[:space:]]+$//')"
+  description="$(trim_trailing_whitespace "$raw_description")"
 
   if [[ -n "$description" ]]; then
-    description="$(echo "$description" | sed -E 's/[[:space:]]+[Tt]oolkit$//')"
-    description="$(echo "$description" | sed -E 's/[[:space:]]+[Ii]nstructions?$//')"
-    description="$(echo "$description" | sed -E 's/[[:space:]]+$//')"
+    if [[ "${description,,}" == *" toolkit" ]]; then
+      description="${description:0:${#description}-8}"
+    fi
+
+    if [[ "${description,,}" == *" instructions" ]]; then
+      description="${description:0:${#description}-13}"
+    elif [[ "${description,,}" == *" instruction" ]]; then
+      description="${description:0:${#description}-12}"
+    fi
+
+    description="$(trim_trailing_whitespace "$description")"
   fi
 
   if [[ -z "$description" ]]; then
