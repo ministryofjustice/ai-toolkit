@@ -9,7 +9,7 @@ on:
     branches:
       - main
 
-permissions: {}
+permissions: { }
 
 jobs:
   zizmor:
@@ -18,4 +18,4 @@ jobs:
       actions: read
       contents: read
       security-events: write
-    uses: ministryofjustice/data-platform-github-actions/.github/workflows/zizmor.yml@49cbc73f4ba59d6c4a2458f0d7d56ae640943df5 # v4.0.11
+    uses: ministryofjustice/data-platform-github-actions/.github/workflows/zizmor.yml@49cbc73f4ba59d6c4a2458f0d7d56ae640943df5 # yamllint disable-line rule:line-length

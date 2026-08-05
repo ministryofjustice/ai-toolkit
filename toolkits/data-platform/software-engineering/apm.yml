@@ -6,7 +6,7 @@ author: Data Platform Engineering
 targets:
   - copilot
 dependencies:
-  apm: []
-  mcp: []
+  apm: [ ]
+  mcp: [ ]
 includes: auto
-scripts: {}
+scripts: { }

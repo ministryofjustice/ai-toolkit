@@ -57,6 +57,46 @@ escape_pipes() {
   echo "${value//|/\\|}"
 }
 
+repeat_char() {
+  local char="$1"
+  local count="$2"
+
+  printf "%*s" "$count" "" | tr ' ' "$char"
+}
+
+emit_markdown_table() {
+  local rows_file="$1"
+  local team_header="Team"
+  local toolkit_header="Toolkit"
+  local contents_header="Contents"
+  local team_width="${#team_header}"
+  local toolkit_width="${#toolkit_header}"
+  local contents_width="${#contents_header}"
+  local team
+  local toolkit
+  local contents
+
+  while IFS=$'\t' read -r team toolkit contents; do
+    [[ -z "$team" ]] && continue
+
+    (( ${#team} > team_width )) && team_width="${#team}"
+    (( ${#toolkit} > toolkit_width )) && toolkit_width="${#toolkit}"
+    (( ${#contents} > contents_width )) && contents_width="${#contents}"
+  done < "$rows_file"
+
+  printf "| %-*s | %-*s | %-*s |\n" "$team_width" "$team_header" "$toolkit_width" "$toolkit_header" "$contents_width" "$contents_header"
+  printf "| %s | %s | %s |\n" \
+    "$(repeat_char '-' "$team_width")" \
+    "$(repeat_char '-' "$toolkit_width")" \
+    "$(repeat_char '-' "$contents_width")"
+
+  while IFS=$'\t' read -r team toolkit contents; do
+    [[ -z "$team" ]] && continue
+
+    printf "| %-*s | %-*s | %-*s |\n" "$team_width" "$team" "$toolkit_width" "$toolkit" "$contents_width" "$contents"
+  done < "$rows_file"
+}
+
 trim_trailing_whitespace() {
   local value="$1"
 
@@ -144,32 +184,34 @@ generate_rows_for_family() {
 
     description="$(escape_pipes "$description")"
 
-    echo "| $family_display | [$toolkit_display]($rel_toolkit_dir) | $description |"
+    printf "%s\t%s\t%s\n" "$family_display" "[$toolkit_display]($rel_toolkit_dir)" "$description"
   done <<< "$manifests"
 }
 
 GENERATED_CONTENT_FILE="$(mktemp)"
-trap 'rm -f "$GENERATED_CONTENT_FILE" "$UPDATED_README_FILE"' EXIT
+ROWS_FILE="$(mktemp)"
+trap 'rm -f "$GENERATED_CONTENT_FILE" "$ROWS_FILE" "$UPDATED_README_FILE"' EXIT
 
 if ! grep -q "^${START_MARKER}$" "$README_PATH" || ! grep -q "^${END_MARKER}$" "$README_PATH"; then
   echo "README is missing generated toolkit markers." >&2
   exit 1
 fi
 
+universal_dir="$TOOLKITS_DIR/universal"
+if [[ -d "$universal_dir" ]]; then
+  generate_rows_for_family "$universal_dir" >> "$ROWS_FILE"
+fi
+
+family_dirs="$(find "$TOOLKITS_DIR" -mindepth 1 -maxdepth 1 -type d ! -name 'universal' | sort)"
+while IFS= read -r family_dir; do
+  [[ -z "$family_dir" ]] && continue
+  generate_rows_for_family "$family_dir" >> "$ROWS_FILE"
+done <<< "$family_dirs"
+
 {
-  echo "| Team | Toolkit | Contents |"
-  echo "| ---- | ------- | -------- |"
-
-  universal_dir="$TOOLKITS_DIR/universal"
-  if [[ -d "$universal_dir" ]]; then
-    generate_rows_for_family "$universal_dir"
-  fi
-
-  family_dirs="$(find "$TOOLKITS_DIR" -mindepth 1 -maxdepth 1 -type d ! -name 'universal' | sort)"
-  while IFS= read -r family_dir; do
-    [[ -z "$family_dir" ]] && continue
-    generate_rows_for_family "$family_dir"
-  done <<< "$family_dirs"
+  echo
+  emit_markdown_table "$ROWS_FILE"
+  echo
 } > "$GENERATED_CONTENT_FILE"
 
 UPDATED_README_FILE="$(mktemp)"

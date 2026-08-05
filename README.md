@@ -20,11 +20,13 @@ plugins, and language conventions).
 This section is generated from the `toolkits/` directory by `scripts/update-readme-toolkits.sh`.
 
 <!-- BEGIN GENERATED TOOLKITS -->
-| Team | Toolkit | Contents |
-| ---- | ------- | -------- |
-| Universal | [universal](toolkits/universal) | Universal instructions. |
+
+| Team          | Toolkit                                                             | Contents                                         |
+| ------------- | ------------------------------------------------------------------- | ------------------------------------------------ |
+| Universal     | [universal](toolkits/universal)                                     | Universal instructions.                          |
 | Data Platform | [platform-engineering](toolkits/data-platform/platform-engineering) | Data Platform platform engineering instructions. |
 | Data Platform | [software-engineering](toolkits/data-platform/software-engineering) | Data Platform software engineering instructions. |
+
 <!-- END GENERATED TOOLKITS -->
 
 ## Contributing toolkits

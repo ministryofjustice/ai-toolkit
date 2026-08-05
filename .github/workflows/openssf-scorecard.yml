@@ -8,7 +8,7 @@ on:
   schedule:
     - cron: "30 6 * * 1"
 
-permissions: {}
+permissions: { }
 
 jobs:
   openssf-scorecard:
