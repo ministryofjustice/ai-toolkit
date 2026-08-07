@@ -79,10 +79,10 @@ emit_markdown_table() {
   while IFS=$'\t' read -r team toolkit contents; do
     [[ -z "$team" ]] && continue
 
-    (( ${#team} > team_width )) && team_width="${#team}"
-    (( ${#toolkit} > toolkit_width )) && toolkit_width="${#toolkit}"
-    (( ${#contents} > contents_width )) && contents_width="${#contents}"
-  done < "$rows_file"
+    ((${#team} > team_width)) && team_width="${#team}"
+    ((${#toolkit} > toolkit_width)) && toolkit_width="${#toolkit}"
+    ((${#contents} > contents_width)) && contents_width="${#contents}"
+  done <"$rows_file"
 
   printf "| %-*s | %-*s | %-*s |\n" "$team_width" "$team_header" "$toolkit_width" "$toolkit_header" "$contents_width" "$contents_header"
   printf "| %s | %s | %s |\n" \
@@ -94,7 +94,7 @@ emit_markdown_table() {
     [[ -z "$team" ]] && continue
 
     printf "| %-*s | %-*s | %-*s |\n" "$team_width" "$team" "$toolkit_width" "$toolkit" "$contents_width" "$contents"
-  done < "$rows_file"
+  done <"$rows_file"
 }
 
 trim_trailing_whitespace() {
@@ -185,7 +185,7 @@ generate_rows_for_family() {
     description="$(escape_pipes "$description")"
 
     printf "%s\t%s\t%s\n" "$family_display" "[$toolkit_display]($rel_toolkit_dir)" "$description"
-  done <<< "$manifests"
+  done <<<"$manifests"
 }
 
 GENERATED_CONTENT_FILE="$(mktemp)"
@@ -199,20 +199,20 @@ fi
 
 universal_dir="$TOOLKITS_DIR/universal"
 if [[ -d "$universal_dir" ]]; then
-  generate_rows_for_family "$universal_dir" >> "$ROWS_FILE"
+  generate_rows_for_family "$universal_dir" >>"$ROWS_FILE"
 fi
 
 family_dirs="$(find "$TOOLKITS_DIR" -mindepth 1 -maxdepth 1 -type d ! -name 'universal' | sort)"
 while IFS= read -r family_dir; do
   [[ -z "$family_dir" ]] && continue
-  generate_rows_for_family "$family_dir" >> "$ROWS_FILE"
-done <<< "$family_dirs"
+  generate_rows_for_family "$family_dir" >>"$ROWS_FILE"
+done <<<"$family_dirs"
 
 {
   echo
   emit_markdown_table "$ROWS_FILE"
   echo
-} > "$GENERATED_CONTENT_FILE"
+} >"$GENERATED_CONTENT_FILE"
 
 UPDATED_README_FILE="$(mktemp)"
 awk -v start="$START_MARKER" -v end="$END_MARKER" -v generated="$GENERATED_CONTENT_FILE" '
@@ -233,7 +233,7 @@ awk -v start="$START_MARKER" -v end="$END_MARKER" -v generated="$GENERATED_CONTE
   skip != 1 {
     print
   }
-' "$README_PATH" > "$UPDATED_README_FILE"
+' "$README_PATH" >"$UPDATED_README_FILE"
 
 mv "$UPDATED_README_FILE" "$README_PATH"
 
