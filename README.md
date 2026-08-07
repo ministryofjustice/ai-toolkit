@@ -6,31 +6,38 @@
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ministryofjustice/ai-toolkit)
 
-A central repository of GitHub Copilot instructions for the Ministry of Justice. It
-provides reusable agent packages — derived from the
-[MoJ AI Coding Environment standards](https://github.com/ministryofjustice/AICodingStandards) —
-that are distributed to consuming repositories via APM (Agent Package Manager),
+A central repository of toolkits for the Ministry of Justice. This repository
+provides reusable toolkit packages that are distributed to consuming repositories via APM (Agent Package Manager),
 ensuring consistent AI-assisted development practices across the organisation.
 
 ## Toolkits
 
-Toolkits are organised by profession/domain. Profession-level toolkits contain
-technology-specific instruction files (for example, language conventions) that apply
-only to matching file types.
+Toolkits are organised by team.
+Teams can define profession-specific instructions within their team directory,
+alongside other toolkit assets (for example standards, prompts, skills,
+plugins, and language conventions).
 
-| Toolkit                                                 | Contents                                                                                                                                                                                                |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`universal`](toolkits/universal)                       | Cross-cutting standards that apply to every repository: security and PII, British English, MOJ standards, development principles, naming, licensing, AI governance, and version control.                |
-| [`software-engineering`](toolkits/software-engineering) | General coding standards, design (SOLID), testing, security, and CI/CD, plus language-specific instructions for Python (`**/*.py`) and Ruby (`**/*.rb`).                                                |
-| [`frontend-engineering`](toolkits/frontend-engineering) | Accessibility (WCAG 2.2 AA) and Government Service Manual guidance, plus technology-specific instructions for HTML/CSS (`**/*.{html,css,scss}`) and JavaScript/TypeScript (`**/*.{ts,tsx,js,jsx,vue}`). |
+This section is generated from the `toolkits/` directory by `scripts/update-readme-toolkits.sh`.
 
-Each toolkit is an APM package: an `apm.yml` manifest plus
-`.apm/instructions/*.instructions.md` files. See each toolkit's readme (linked
-above) for the full list of instructions and their MoJ sources.
+<!-- BEGIN GENERATED TOOLKITS -->
+
+| Team          | Toolkit                                                             | Contents                                         |
+| ------------- | ------------------------------------------------------------------- | ------------------------------------------------ |
+| Universal     | [universal](toolkits/universal)                                     | Universal instructions.                          |
+| Data Platform | [platform-engineering](toolkits/data-platform/platform-engineering) | Data Platform platform engineering instructions. |
+| Data Platform | [software-engineering](toolkits/data-platform/software-engineering) | Data Platform software engineering instructions. |
+
+<!-- END GENERATED TOOLKITS -->
+
+## Contributing toolkits
+
+Teams are welcome to add their own families, teams, and toolkits to this repository.
+If you want to contribute or evolve guidance for your area, open a pull request with
+your proposed `apm.yml` and toolkit assets.
 
 ## Setup Instructions
 
-These toolkits are consumed with [APM (Agent Package Manager)](https://github.com/danielmeppiel/apm).
+These toolkits are consumed with [APM (Agent Package Manager)](https://github.com/microsoft/apm).
 
 ### 1. Install APM
 
@@ -58,7 +65,10 @@ For Homebrew, Scoop, pip, or other install methods, see the [APM installation gu
 
 ### 2. Declare the toolkits as dependencies
 
-Create an `apm.yml` in the root of your repository (or run `apm init`) and add the toolkits you want as dependencies:
+Create an `apm.yml` in the root of your repository (or run `apm init`) and add
+the toolkits you want as dependencies.
+
+Example:
 
 ```yaml
 name: <name>
@@ -70,7 +80,6 @@ targets:
 dependencies:
   apm:
     - ministryofjustice/ai-toolkit/toolkits/universal#1.0.0
-    - ministryofjustice/ai-toolkit/toolkits/software-engineering#1.0.0
 ```
 
 <!-- jscpd:ignore-end -->
@@ -82,7 +91,7 @@ apm install
 ```
 
 APM resolves the toolkits, pins them in `apm.lock.yaml`, and deploys their
-instructions into the detected harness (for example `.github/` for Copilot).
+assets into the detected harness (for example `.github/` for Copilot).
 
 ## Using a development container
 
@@ -108,4 +117,5 @@ CLI by hand.
    apm install
    ```
 
-You still declare the toolkits in `apm.yml` exactly as shown above.
+You still declare the required toolkit dependencies in `apm.yml` as shown above
+for your chosen team.
