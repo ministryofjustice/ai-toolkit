@@ -6,11 +6,11 @@ author: Engineering AI Enablement
 targets:
   - copilot
 dependencies:
-  apm: [ ]
+  apm: []
   mcp:
     - name: github
       registry: false
       transport: http
       url: https://api.githubcopilot.com/mcp/
 includes: auto
-scripts: { }
+scripts: {}

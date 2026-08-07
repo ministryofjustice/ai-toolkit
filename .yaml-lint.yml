@@ -2,6 +2,7 @@
 extends: default
 
 rules:
+  brackets: disable
   braces: disable
   comments: disable
   line-length:
