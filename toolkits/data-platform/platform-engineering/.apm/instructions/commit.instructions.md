@@ -1,6 +1,6 @@
 ---
 description: Commit Style Instructions
-source: https://github.com/ministryofjustice/ai-toolkit
+source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/data-platform/platform-engineering/.apm/instructions/commit.instructions.md
 ---
 
 # Commit Styling

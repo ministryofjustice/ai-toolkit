@@ -1,6 +1,6 @@
 ---
 description: Kubernetes Instructions
-source: https://github.com/ministryofjustice/ai-toolkit
+source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/data-platform/platform-engineering/.apm/instructions/kubernetes.instructions.md
 ---
 
 # Kubernetes Instructions
