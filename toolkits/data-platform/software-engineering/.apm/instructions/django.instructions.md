@@ -1,5 +1,5 @@
 ---
-description: Conventions for building secure, maintainable Django applications.
+description: Conventions for building secure, maintainable Django applications. (managed via APM from https://github.com/ministryofjustice/ai-toolkit)
 applyTo: "**/*.py,**/templates/**/*.html"
 ---
 
