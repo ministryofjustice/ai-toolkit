@@ -1,5 +1,6 @@
 ---
-description: Kubernetes Instructions (managed via APM from https://github.com/ministryofjustice/ai-toolkit)
+description: Kubernetes Instructions
+source: https://github.com/ministryofjustice/ai-toolkit
 ---
 
 # Kubernetes Instructions

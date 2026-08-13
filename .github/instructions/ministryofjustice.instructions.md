@@ -1,5 +1,6 @@
 ---
-description: Ministry of Justice Standards (managed via APM from https://github.com/ministryofjustice/ai-toolkit)
+description: Ministry of Justice Standards
+source: https://github.com/ministryofjustice/ai-toolkit
 ---
 
 # Ministry of Justice Standards

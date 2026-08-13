@@ -1,5 +1,6 @@
 ---
-description: Terraform instructions (managed via APM from https://github.com/ministryofjustice/ai-toolkit)
+description: Terraform instructions
+source: https://github.com/ministryofjustice/ai-toolkit
 ---
 
 # Terraform
