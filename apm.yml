@@ -1,0 +1,29 @@
+name: ministryofjustice
+version: 0.1.0
+description: Curated marketplace of Ministry of Justice AI toolkits
+license: MIT
+marketplace:
+  owner:
+    name: ministryofjustice
+    url: https://github.com/ministryofjustice
+  versioning:
+    strategy: tag_pattern
+  build:
+    tagPattern: "{name}-v{version}"
+  outputs:
+    claude: {}
+  packages:
+    - name: universal
+      description: Universal Copilot instructions for all Ministry of Justice repositories
+      source: ./toolkits/universal
+      version: 1.0.0
+
+    - name: data-platform-platform-engineering
+      description: Data Platform platform engineering Copilot instructions and prompts
+      source: ./toolkits/data-platform/platform-engineering
+      version: 1.0.0
+
+    - name: data-platform-software-engineering
+      description: Data Platform software engineering Copilot instructions (Python, Django)
+      source: ./toolkits/data-platform/software-engineering
+      version: 1.0.0

@@ -38,6 +38,7 @@ your proposed `apm.yml` and toolkit assets.
 ## Setup Instructions
 
 These toolkits are consumed with [APM (Agent Package Manager)](https://github.com/microsoft/apm).
+You can install APM directly, or use a [development container](#using-a-development-container) to install it automatically.
 
 ### 1. Install APM
 
@@ -92,6 +93,61 @@ apm install
 
 APM resolves the toolkits, pins them in `apm.lock.yaml`, and deploys their
 assets into the detected harness (for example `.github/` for Copilot).
+
+## Optional: discovering toolkits via the marketplace
+
+This repository is also published as an APM marketplace - a curated index of the
+toolkits above. The marketplace is a discovery and naming layer; it is not
+required for the automated `apm install` flow described above, which resolves
+dependencies directly from `apm.yml`.
+
+It lets consumers register this repository once and then add toolkits by
+friendly name rather than by repository path. How a toolkit is surfaced and
+installed varies by AI assistant. See
+[Consume from any assistant](https://microsoft.github.io/apm/producer/publish-to-a-marketplace/#consume-from-any-assistant)
+for the current, assistant-specific steps.
+
+## Maintaining the marketplace
+
+The marketplace is defined by the `marketplace:` block in the root
+[apm.yml](apm.yml) and compiled to
+[.claude-plugin/marketplace.json](.claude-plugin/marketplace.json). To add or
+update a toolkit:
+
+1. Edit the `packages:` list in `apm.yml` (or use `apm marketplace package add ./toolkits/<path>`).
+1. Regenerate and validate the artifact:
+
+   ```bash
+   apm pack --check-versions --check-clean
+   ```
+
+1. Commit both `apm.yml` and the generated `.claude-plugin/marketplace.json`.
+
+### Creating a new release
+
+To release a new version of a toolkit (for example bumping `universal` to
+`1.1.0`), prepare `main` before drafting the release:
+
+1. Bump `version:` in both `toolkits/<path>/apm.yml` and that package's entry in the root [apm.yml](apm.yml).
+1. Regenerate and validate the artifact:
+
+   ```bash
+   apm pack --check-versions --check-clean
+   ```
+
+1. Commit `apm.yml` and the updated `.claude-plugin/marketplace.json` to `main`.
+1. Then draft the release with the new tag (for example `universal-v1.1.0`).
+
+Skipping the bump fails the release gates: `--check-clean` rejects a committed
+`marketplace.json` that does not match a fresh `apm pack`.
+
+To draft the new release:
+
+1. Go to **Releases → Draft a new release**.
+1. Choose a tag → **Create new tag**, of the form `<package-name>-v<version>` (for example `universal-v1.0.0`). The `<package-name>` matches the toolkit's package name in the root `apm.yml` and `<version>` must match that package's `version:`. The `v` prefix and the matching name are what let consumers pin a SemVer range such as `toolkits/universal#^1.0.0`.
+1. Set **Target** to `main`.
+1. Expand **Set as the latest release** and choose **Keep existing** so the release is not marked as latest.
+1. Add a title which matches the tag, generate release notes, then click **Publish release**.
 
 ## Using a development container
 

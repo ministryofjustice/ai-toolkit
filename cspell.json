@@ -21,6 +21,7 @@
     "pyproject",
     "pytest",
     "querysets",
+    "SemVer",
     "SonarQube",
     "teardown",
     "tfvars",
