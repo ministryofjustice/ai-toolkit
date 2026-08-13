@@ -1,7 +1,8 @@
-name: software-engineering-toolkit
+---
+name: data-platform-software-engineering
 version: 1.0.0
 description: Software Engineering Toolkit
-author: Ministry of Justice
+author: Data Platform Engineering
 targets:
   - copilot
 dependencies:
