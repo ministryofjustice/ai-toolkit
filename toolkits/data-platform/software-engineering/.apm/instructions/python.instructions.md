@@ -1,5 +1,5 @@
 ---
-description: Baseline conventions for Python code quality, structure, testing, and security.
+description: Baseline conventions for Python code quality, structure, testing, and security. (managed via APM from https://github.com/ministryofjustice/ai-toolkit)
 applyTo: "**/*.py"
 ---
 

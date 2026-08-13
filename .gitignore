@@ -1,5 +1,6 @@
 .env
 .terraform/
+build/
 coverage/
 venv/
 env/
@@ -8,3 +9,7 @@ env/
 *.sha256
 terraform.tfstate
 .vscode/settings.json
+
+
+# APM dependencies
+apm_modules/

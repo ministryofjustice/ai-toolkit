@@ -1,5 +1,5 @@
 ---
-description: Commit Style Instructions
+description: Commit Style Instructions (managed via APM from https://github.com/ministryofjustice/ai-toolkit)
 ---
 
 # Commit Styling

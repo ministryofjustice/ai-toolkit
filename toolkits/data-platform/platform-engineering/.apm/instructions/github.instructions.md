@@ -1,5 +1,5 @@
 ---
-description: This file provides instructions for using GitHub to report bugs and create pull requests in the `ministryofjustice/data-platform` repository.
+description: This file provides instructions for using GitHub to report bugs and create pull requests in the `ministryofjustice/data-platform` repository. (managed via APM from https://github.com/ministryofjustice/ai-toolkit)
 ---
 
 # GitHub Instructions

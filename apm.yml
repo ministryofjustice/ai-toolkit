@@ -2,6 +2,11 @@ name: ministryofjustice
 version: 0.1.0
 description: Curated marketplace of Ministry of Justice AI toolkits
 license: MIT
+targets:
+  - copilot
+dependencies:
+  apm:
+    - ministryofjustice/ai-toolkit/toolkits/universal#main
 marketplace:
   owner:
     name: ministryofjustice
