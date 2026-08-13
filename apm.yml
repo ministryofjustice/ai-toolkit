@@ -1,6 +1,6 @@
 name: ministryofjustice
 version: 0.1.0
-description: Curated marketplace of Ministry of Justice AI toolkits for GitHub Copilot
+description: Curated marketplace of Ministry of Justice AI toolkits
 license: MIT
 marketplace:
   owner:
