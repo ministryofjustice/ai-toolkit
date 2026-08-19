@@ -1,0 +1,42 @@
+---
+name: Marketplace Sync
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - apm.yml
+      - .claude-plugin/marketplace.json
+      - scripts/check-marketplace-sync.sh
+      - toolkits/**
+  push:
+    branches:
+      - main
+    paths:
+      - apm.yml
+      - .claude-plugin/marketplace.json
+      - scripts/check-marketplace-sync.sh
+      - toolkits/**
+
+permissions:
+  contents: read
+
+jobs:
+  marketplace-sync:
+    name: Marketplace sync
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.x"
+
+      - name: Check marketplace is in sync
+        run: bash scripts/check-marketplace-sync.sh
