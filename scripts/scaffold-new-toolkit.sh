@@ -4,7 +4,7 @@ set -euo pipefail
 # Scaffolds a skeleton toolkit for a new team under toolkits/<team>/<toolkit>/,
 # and registers it in the root apm.yml and the compiled marketplace.json.
 #
-# Usage: scripts/new-team-toolkit.sh <team-name> [toolkit-name]
+# Usage: scripts/scaffold-new-toolkit.sh <team-name> [toolkit-name]
 #   <team-name>     Required. Slug for the team (for example "digital-services").
 #   [toolkit-name]  Optional. Slug for the profession/toolkit. Defaults to "engineering".
 
@@ -14,7 +14,7 @@ APM_MANIFEST="$ROOT_DIR/apm.yml"
 MARKETPLACE_JSON="$ROOT_DIR/.claude-plugin/marketplace.json"
 
 usage() {
-  echo "Usage: scripts/new-team-toolkit.sh <team-name> [toolkit-name]" >&2
+  echo "Usage: scripts/scaffold-new-toolkit.sh <team-name> [toolkit-name]" >&2
 }
 
 if [[ $# -lt 1 || $# -gt 2 ]]; then

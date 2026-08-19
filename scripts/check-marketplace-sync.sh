@@ -139,7 +139,7 @@ if errors:
         print(f"  - {error}")
     print()
     print("Regenerate it with: apm pack --check-versions --check-clean")
-    print("or scaffold new toolkits with: scripts/new-team-toolkit.sh <team> [toolkit]")
+    print("or scaffold new toolkits with: scripts/scaffold-new-toolkit.sh <team> [toolkit]")
     sys.exit(1)
 
 print("Marketplace is in sync with the toolkits on disk.")
