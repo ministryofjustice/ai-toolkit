@@ -106,7 +106,7 @@ friendly name rather than by repository path.
 
 ### 1. Register the marketplace
 
-Register this repository as a marketplace, pointing at the repository itself:
+Register this repository as a marketplace:
 
 ```bash
 apm marketplace add ministryofjustice/ai-toolkit
@@ -146,25 +146,6 @@ How a toolkit is surfaced and installed can also vary by AI assistant. See
 [Consume from any assistant](https://microsoft.github.io/apm/producer/publish-to-a-marketplace/#consume-from-any-assistant)
 for the current, assistant-specific steps.
 
-## Maintaining the marketplace
-
-The marketplace is defined by the `marketplace:` block in the root
-[apm.yml](apm.yml) and compiled to
-[.claude-plugin/marketplace.json](.claude-plugin/marketplace.json). To add or
-update a toolkit:
-
-1. Edit the `packages:` list in `apm.yml` (or use `apm marketplace package add ./toolkits/<path>`).
-1. Regenerate and validate the artifact:
-
-   ```bash
-   apm pack --check-versions --check-clean
-   ```
-
-1. Commit both `apm.yml` and the generated `.claude-plugin/marketplace.json`.
-
-Consumers track `main` directly (`#main`), so changes merged to `main` are
-picked up on the next `apm install` without a separate release step.
-
 ## Using a development container
 
 If your repository uses [development containers](https://containers.dev/), you can
@@ -191,3 +172,22 @@ CLI by hand.
 
 You still declare the required toolkit dependencies in `apm.yml` as shown above
 for your chosen team.
+
+## Maintaining the marketplace
+
+The marketplace is defined by the `marketplace:` block in the root
+[apm.yml](apm.yml) and compiled to
+[.claude-plugin/marketplace.json](.claude-plugin/marketplace.json). To add or
+update a toolkit:
+
+1. Edit the `packages:` list in `apm.yml` (or use `apm marketplace package add ./toolkits/<path>`).
+1. Regenerate and validate the artifact:
+
+   ```bash
+   apm pack --check-versions --check-clean
+   ```
+
+1. Commit both `apm.yml` and the generated `.claude-plugin/marketplace.json`.
+
+Consumers track `main` directly (`#main`), so changes merged to `main` are
+picked up on the next `apm install` without a separate release step.
