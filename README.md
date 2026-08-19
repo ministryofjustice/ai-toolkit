@@ -113,7 +113,7 @@ apm marketplace add ministryofjustice/ai-toolkit
 ```
 
 The marketplace is registered under its `name:` from [apm.yml](apm.yml) -
-`ministryofjustice` - along with the toolkits it indexes.
+`ministryofjustice` - along with the toolkits it lists.
 
 ### 2. Install a toolkit by name
 
