@@ -39,12 +39,11 @@ validate_slug "team name" "$TEAM_NAME"
 validate_slug "toolkit name" "$TOOLKIT_NAME"
 
 title_case() {
-  echo "$1" | tr '-' ' ' | awk '{
-    for (i = 1; i <= NF; i++) {
-      $i = toupper(substr($i, 1, 1)) substr($i, 2)
-    }
-    print
-  }'
+  local words=() word
+  for word in ${1//-/ }; do
+    words+=("${word^}")
+  done
+  echo "${words[*]}"
 }
 
 PACKAGE_NAME="${TEAM_NAME}-${TOOLKIT_NAME}"
