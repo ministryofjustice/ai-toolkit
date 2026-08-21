@@ -8,7 +8,7 @@ on:
     paths:
       - apm.yml
       - .claude-plugin/marketplace.json
-      - scripts/check-marketplace-sync.sh
+      - scripts/check_marketplace_sync.py
       - toolkits/**
   push:
     branches:
@@ -16,7 +16,7 @@ on:
     paths:
       - apm.yml
       - .claude-plugin/marketplace.json
-      - scripts/check-marketplace-sync.sh
+      - scripts/check_marketplace_sync.py
       - toolkits/**
 
 permissions:
@@ -34,4 +34,4 @@ jobs:
           persist-credentials: false
 
       - name: Check marketplace is in sync
-        run: bash scripts/check-marketplace-sync.sh
+        run: python3 scripts/check_marketplace_sync.py
