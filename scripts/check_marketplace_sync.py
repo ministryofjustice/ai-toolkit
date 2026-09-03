@@ -129,22 +129,17 @@ def find_errors(disk, packages, plugins):
 
     for source in sorted(disk - package_sources):
         errors.append(
-            f"Toolkit '{source}' has no matching package in apm.yml "
-            "(marketplace.packages)."
+            f"Toolkit '{source}' has no matching package in apm.yml (marketplace.packages)."
         )
     for source in sorted(package_sources - disk):
-        errors.append(
-            f"apm.yml lists package '{source}' but no toolkit exists at that path."
-        )
+        errors.append(f"apm.yml lists package '{source}' but no toolkit exists at that path.")
     for source in sorted(package_sources - plugin_sources):
         errors.append(
-            f"Package '{source}' in apm.yml is missing from "
-            ".claude-plugin/marketplace.json."
+            f"Package '{source}' in apm.yml is missing from .claude-plugin/marketplace.json."
         )
     for source in sorted(plugin_sources - package_sources):
         errors.append(
-            f"marketplace.json lists plugin '{source}' with no matching "
-            "package in apm.yml."
+            f"marketplace.json lists plugin '{source}' with no matching package in apm.yml."
         )
     for source in sorted(package_sources & plugin_sources):
         errors.extend(field_mismatches(source, packages[source], plugins[source]))
@@ -166,10 +161,7 @@ def main():
             print(f"  - {error}")
         print()
         print("Regenerate it with: apm pack --check-versions --check-clean")
-        print(
-            "or scaffold new toolkits with: "
-            "scripts/scaffold-new-toolkit.sh <team> [toolkit]"
-        )
+        print("or scaffold new toolkits with: scripts/scaffold-new-toolkit.sh <team> [toolkit]")
         return 1
 
     print("Marketplace is in sync with the toolkits on disk.")
