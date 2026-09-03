@@ -134,7 +134,7 @@ def find_errors(disk, packages, plugins):
         )
     for source in sorted(package_sources - disk):
         errors.append(
-            f"apm.yml lists package '{source}' but no toolkit exists " "at that path."
+            f"apm.yml lists package '{source}' but no toolkit exists at that path."
         )
     for source in sorted(package_sources - plugin_sources):
         errors.append(
