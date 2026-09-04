@@ -18,6 +18,7 @@
     "openssf",
     "overengineering",
     "Peoplefinder",
+    "pylint",
     "pyproject",
     "pytest",
     "querysets",
