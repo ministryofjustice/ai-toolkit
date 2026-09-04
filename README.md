@@ -40,10 +40,10 @@ team name (and an optional toolkit/profession name, which defaults to
 `engineering`):
 
 ```bash
-./scripts/new-team-toolkit.sh <team-name> [toolkit-name]
+./scripts/scaffold-new-toolkit.sh <team-name> [toolkit-name]
 ```
 
-For example, `./scripts/new-team-toolkit.sh digital-services engineering`
+For example, `./scripts/scaffold-new-toolkit.sh digital-services engineering`
 creates `toolkits/digital-services/engineering/` with a starter `apm.yml` and an
 empty `.apm/` folder, registers the toolkit in the root [apm.yml](apm.yml) and
 [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json), and refreshes
