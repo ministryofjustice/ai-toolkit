@@ -84,27 +84,35 @@ def collect_disk_sources():
     return sources
 
 
-def collect_packages():
-    """Return marketplace packages from apm.yml keyed by source."""
+def index_by_source(entries):
+    """Index entries by source, returning (by_source, duplicate_sources).
+
+    Later entries win in by_source, matching how apm/marketplace tooling
+    behaves, but any source seen more than once is flagged as a duplicate
+    rather than silently overwritten.
+    """
     by_source = {}
-    for package in parse_packages(APM_MANIFEST):
-        source = package.get("source", "").rstrip("/")
-        if source:
-            by_source[source] = package
-    return by_source
+    duplicates = set()
+    for entry in entries:
+        source = entry.get("source", "").rstrip("/")
+        if not source:
+            continue
+        if source in by_source:
+            duplicates.add(source)
+        by_source[source] = entry
+    return by_source, duplicates
+
+
+def collect_packages():
+    """Return (by_source, duplicate_sources) for apm.yml packages."""
+    return index_by_source(parse_packages(APM_MANIFEST))
 
 
 def collect_plugins():
-    """Return marketplace.json plugins keyed by source."""
+    """Return (by_source, duplicate_sources) for marketplace.json plugins."""
     with open(MARKETPLACE_JSON, encoding="utf-8") as handle:
         marketplace = json.load(handle)
-
-    by_source = {}
-    for plugin in marketplace.get("plugins") or []:
-        source = plugin.get("source", "").rstrip("/")
-        if source:
-            by_source[source] = plugin
-    return by_source
+    return index_by_source(marketplace.get("plugins") or [])
 
 
 def field_mismatches(source, package, plugin):
@@ -121,12 +129,16 @@ def field_mismatches(source, package, plugin):
     return mismatches
 
 
-def find_errors(disk, packages, plugins):
+def find_errors(disk, packages, package_duplicates, plugins, plugin_duplicates):
     """Return sync errors across disk, apm.yml and marketplace.json."""
     package_sources = set(packages)
     plugin_sources = set(plugins)
     errors = []
 
+    for source in sorted(package_duplicates):
+        errors.append(f"apm.yml lists multiple packages with source '{source}'.")
+    for source in sorted(plugin_duplicates):
+        errors.append(f"marketplace.json lists multiple plugins with source '{source}'.")
     for source in sorted(disk - package_sources):
         errors.append(
             f"Toolkit '{source}' has no matching package in apm.yml (marketplace.packages)."
@@ -149,10 +161,14 @@ def find_errors(disk, packages, plugins):
 
 def main():
     """Run the sync check and return a process exit code."""
+    packages, package_duplicates = collect_packages()
+    plugins, plugin_duplicates = collect_plugins()
     errors = find_errors(
         collect_disk_sources(),
-        collect_packages(),
-        collect_plugins(),
+        packages,
+        package_duplicates,
+        plugins,
+        plugin_duplicates,
     )
 
     if errors:
