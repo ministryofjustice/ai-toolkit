@@ -24,6 +24,7 @@ This section is generated from the `toolkits/` directory by `scripts/update-read
 | Team          | Toolkit                                                             | Contents                                         |
 | ------------- | ------------------------------------------------------------------- | ------------------------------------------------ |
 | Universal     | [universal](toolkits/universal)                                     | Universal instructions.                          |
+| App Platforms | [documentation](toolkits/app-platforms/documentation)               | App Platforms Documentation instructions.        |
 | Data Platform | [platform-engineering](toolkits/data-platform/platform-engineering) | Data Platform platform engineering instructions. |
 | Data Platform | [software-engineering](toolkits/data-platform/software-engineering) | Data Platform software engineering instructions. |
 
