@@ -26,7 +26,7 @@ Your task:
 - When generating the front matter for the ADR (specifically `decision-makers`, `informed`, and `consulted`):
   - Format the list as a valid YAML sequence using the block style (dashes).
   - For any GitHub usernames (values prefixed with "@"), wrap the value in single quotes (e.g. `'@username'`) to ensure valid YAML parsing.
-- Ensure the generated markdown adheres to Markdown linting rules.
+- Ensure the generated Markdown adheres to Markdown linter rules.
 
 ## Process Rules
 

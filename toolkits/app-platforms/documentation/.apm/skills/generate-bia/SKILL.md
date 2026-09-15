@@ -1,6 +1,6 @@
 ---
 name: generate-bia
-description: Create a Business Impact Assessment (BIA) document for a service or system. Use when you need to gather references, ask a structured questionnaire, validate coverage against source documents, and produce a formal BIA in markdown.
+description: Create a Business Impact Assessment (BIA) document for a service or system. Use when you need to gather references, ask a structured questionnaire, validate coverage against source documents, and produce a formal BIA in Markdown.
 ---
 
 # Generate Business Impact Assessment (BIA)
@@ -25,7 +25,7 @@ Do not generate the final BIA until the required sections are complete or explic
 - Do not speculate or invent facts.
 - If information is missing or ambiguous, ask follow-up questions.
 - Placeholders are allowed only if the user explicitly wants them.
-- Where contacts are named, use markdown mailto links, for example `[Name](mailto:name@example.com)`.
+- Where contacts are named, use Markdown mailto links, for example `[Name](mailto:name@example.com)`.
 
 ## Required Outcome
 
@@ -33,7 +33,7 @@ The final BIA should:
 
 - have a title and table of contents
 - follow the project template structure unless the user requests otherwise
-- use a single markdown file
+- use a single Markdown file
 - reflect the service’s actual criticality and recovery posture
 - include recovery objectives, roles, dependencies, risks, continuity, activation, testing, storage, reporting, and sign-off
 - validate the document against any supplied checklist or companion guidance
@@ -257,7 +257,7 @@ Ask the user to confirm the scoring scale if one has not already been defined.
 
 ### Step 5: Draft the BIA
 
-When the inputs are complete, generate the BIA in markdown.
+When the inputs are complete, generate the BIA in Markdown.
 
 Follow these rules:
 
