@@ -32,3 +32,8 @@ marketplace:
       description: Data Platform software engineering Copilot instructions (Python, Django)
       source: ./toolkits/data-platform/software-engineering
       version: 1.0.0
+
+    - name: app-platforms-documentation
+      description: Copilot skills for generating project documentation
+      source: ./toolkits/app-platforms/documentation
+      version: 1.0.0
