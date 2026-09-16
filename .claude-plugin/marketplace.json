@@ -22,6 +22,12 @@
       "description": "Data Platform software engineering Copilot instructions (Python, Django)",
       "version": "1.0.0",
       "source": "./toolkits/data-platform/software-engineering"
+    },
+    {
+      "name": "example-team-engineering",
+      "description": "Example Team Engineering Copilot instructions",
+      "version": "1.0.0",
+      "source": "./toolkits/example-team/engineering"
     }
   ]
 }

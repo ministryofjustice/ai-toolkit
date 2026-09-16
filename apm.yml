@@ -32,3 +32,8 @@ marketplace:
       description: Data Platform software engineering Copilot instructions (Python, Django)
       source: ./toolkits/data-platform/software-engineering
       version: 1.0.0
+
+    - name: example-team-engineering
+      description: Example Team Engineering Copilot instructions
+      source: ./toolkits/example-team/engineering
+      version: 1.0.0

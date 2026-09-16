@@ -26,6 +26,7 @@ This section is generated from the `toolkits/` directory by `scripts/update-read
 | Universal     | [universal](toolkits/universal)                                     | Universal instructions.                          |
 | Data Platform | [platform-engineering](toolkits/data-platform/platform-engineering) | Data Platform platform engineering instructions. |
 | Data Platform | [software-engineering](toolkits/data-platform/software-engineering) | Data Platform software engineering instructions. |
+| Example Team  | [engineering](toolkits/example-team/engineering)                    | Example Team engineering instructions.           |
 
 <!-- END GENERATED TOOLKITS -->
 

@@ -1,0 +1,12 @@
+---
+name: example-team-engineering
+version: 1.0.0
+description: Engineering Toolkit
+author: Example Team
+targets:
+  - copilot
+dependencies:
+  apm: []
+  mcp: []
+includes: auto
+scripts: {}
