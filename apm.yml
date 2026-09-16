@@ -33,7 +33,7 @@ marketplace:
       source: ./toolkits/data-platform/software-engineering
       version: 1.0.0
 
-    - name: app-platforms-documentation
+    - name: eucs-app-platforms-documentation
       description: Copilot skills for generating project documentation
-      source: ./toolkits/app-platforms/documentation
+      source: ./toolkits/eucs-app-platforms/documentation
       version: 1.0.0
