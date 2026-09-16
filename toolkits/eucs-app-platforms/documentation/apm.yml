@@ -1,0 +1,11 @@
+name: eucs-app-platforms-documentation
+version: 1.0.0
+description: App Platforms Documentation Toolkit
+author: EUCS Application Platforms
+targets:
+  - copilot
+  - cursor
+  - opencode
+dependencies:
+includes: auto
+scripts: {}

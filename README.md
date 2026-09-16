@@ -21,11 +21,12 @@ This section is generated from the `toolkits/` directory by `scripts/update-read
 
 <!-- BEGIN GENERATED TOOLKITS -->
 
-| Team          | Toolkit                                                             | Contents                                         |
-| ------------- | ------------------------------------------------------------------- | ------------------------------------------------ |
-| Universal     | [universal](toolkits/universal)                                     | Universal instructions.                          |
-| Data Platform | [platform-engineering](toolkits/data-platform/platform-engineering) | Data Platform platform engineering instructions. |
-| Data Platform | [software-engineering](toolkits/data-platform/software-engineering) | Data Platform software engineering instructions. |
+| Team               | Toolkit                                                             | Contents                                         |
+| ------------------ | ------------------------------------------------------------------- | ------------------------------------------------ |
+| Universal          | [universal](toolkits/universal)                                     | Universal instructions.                          |
+| Data Platform      | [platform-engineering](toolkits/data-platform/platform-engineering) | Data Platform platform engineering instructions. |
+| Data Platform      | [software-engineering](toolkits/data-platform/software-engineering) | Data Platform software engineering instructions. |
+| Eucs App Platforms | [documentation](toolkits/eucs-app-platforms/documentation)          | Eucs App Platforms Documentation instructions.   |
 
 <!-- END GENERATED TOOLKITS -->
 

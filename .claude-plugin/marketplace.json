@@ -22,6 +22,12 @@
       "description": "Data Platform software engineering Copilot instructions (Python, Django)",
       "version": "1.0.0",
       "source": "./toolkits/data-platform/software-engineering"
+    },
+    {
+      "name": "eucs-app-platforms-documentation",
+      "description": "Copilot skills for generating project documentation",
+      "version": "1.0.0",
+      "source": "./toolkits/eucs-app-platforms/documentation"
     }
   ]
 }
