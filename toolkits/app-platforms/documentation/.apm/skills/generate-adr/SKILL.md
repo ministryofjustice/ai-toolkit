@@ -132,6 +132,7 @@ date: "{date}"
 decision-makers: {decision-makers}
 consulted: {consulted}
 informed: {informed}
+
 ---
 
 # {Generated ADR Title}
