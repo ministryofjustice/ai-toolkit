@@ -1,7 +1,7 @@
 ---
 name: generate-hld
 description: Generate a High-Level Design (HLD) document for a solution with architectural guidance. Use this when you need to create comprehensive architectural documentation covering overview, context, architecture design, modules, data design, and security.
-source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/app-platforms/documentation/.apm/skills/generate-hld/SKILL.md
+source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/eucs-app-platforms/documentation/.apm/skills/generate-hld/SKILL.md
 ---
 
 # Generate High-Level Design (HLD) Document

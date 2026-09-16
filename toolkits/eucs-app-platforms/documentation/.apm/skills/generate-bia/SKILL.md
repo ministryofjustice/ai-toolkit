@@ -1,7 +1,7 @@
 ---
 name: generate-bia
 description: Create a Business Impact Assessment (BIA) document for a service or system. Use when you need to gather references, ask a structured questionnaire, validate coverage against source documents, and produce a formal BIA in Markdown.
-source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/app-platforms/documentation/.apm/skills/generate-bia/SKILL.md
+source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/eucs-app-platforms/documentation/.apm/skills/generate-bia/SKILL.md
 ---
 
 # Generate Business Impact Assessment (BIA)

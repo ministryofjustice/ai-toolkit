@@ -1,7 +1,7 @@
 ---
 name: generate-adr
 description: Generate an Architecture Decision Record (ADR) with guided questions, structured decision drivers, and formal documentation. Use this when you need to document architectural decisions with rationale, considered options, and consequences.
-source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/app-platforms/documentation/.apm/skills/generate-adr/SKILL.md
+source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/eucs-app-platforms/documentation/.apm/skills/generate-adr/SKILL.md
 ---
 
 # Generate Architecture Decision Record (ADR)
