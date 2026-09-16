@@ -22,7 +22,11 @@ title_case() {
   local value="$1"
   echo "$value" | tr '-' ' ' | awk '{
     for (i = 1; i <= NF; i++) {
-      $i = toupper(substr($i, 1, 1)) substr($i, 2)
+      if (tolower($i) == "eucs") {
+        $i = "EUCS"
+      } else {
+        $i = toupper(substr($i, 1, 1)) substr($i, 2)
+      }
     }
     print
   }'
