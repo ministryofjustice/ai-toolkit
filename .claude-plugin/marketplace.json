@@ -24,10 +24,10 @@
       "source": "./toolkits/data-platform/software-engineering"
     },
     {
-      "name": "app-platforms-documentation",
+      "name": "eucs-app-platforms-documentation",
       "description": "Copilot skills for generating project documentation",
       "version": "1.0.0",
-      "source": "./toolkits/app-platforms/documentation"
+      "source": "./toolkits/eucs-app-platforms/documentation"
     }
   ]
 }
