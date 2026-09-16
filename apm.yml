@@ -37,8 +37,3 @@ marketplace:
       description: Copilot skills for generating project documentation
       source: ./toolkits/eucs-app-platforms/documentation
       version: 1.0.0
-
-    - name: example-team-engineering
-      description: Example Team Engineering Copilot instructions
-      source: ./toolkits/example-team/engineering
-      version: 1.0.0
