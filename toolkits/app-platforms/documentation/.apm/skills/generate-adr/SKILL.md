@@ -126,6 +126,7 @@ Suggested filename:
 0000-example-adr-title.md
 
 ---
+
 status: "{status}"
 date: "{date}"
 decision-makers: {decision-makers}
@@ -136,22 +137,27 @@ informed: {informed}
 # {Generated ADR Title}
 
 ## Context and Problem Statement
+
 {Context}
 
 ## Decision Drivers
+
 - {Driver 1}
 - {Driver 2}
 - ...
 
 ## Considered Options
+
 - {Option 1}
 - {Option 2}
 - {Option 3}
 
 ## Decision Outcome
+
 Chosen option: "{Chosen option}", because {justification}.
 
 ### Consequences
+
 - Good, because {positive consequence}
 - Bad, because {negative consequence}
   - Mitigation, {mitigation}

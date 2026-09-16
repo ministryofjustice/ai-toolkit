@@ -338,7 +338,7 @@ When using this skill, return results in this structure:
    - terms needing confirmation
 
 6. **Open Questions**
-    - items still needing confirmation before drafting or finalising
+   - items still needing confirmation before drafting or finalising
 
 ## Begin the BIA Process
 
