@@ -85,8 +85,8 @@ def check_versions(base_revision, head_revision):
         head_version = read_version(head_manifest)
         if base_version == head_version:
             errors.append(
-                f"{manifest_path}: version remains '{head_version or '(empty)'}' "
-                "despite toolkit changes. Update the version in apm.yml."
+                f"Version remains '{head_version or '(empty)'}' despite toolkit changes. "
+                f"Update the {manifest_path}."
             )
 
     return errors, len(changed_manifests)
