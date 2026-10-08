@@ -1,4 +1,6 @@
 ---
+name: Instruction Metadata Check
+
 on:
   pull_request:
     branches:
