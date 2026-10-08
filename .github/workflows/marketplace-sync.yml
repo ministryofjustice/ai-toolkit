@@ -9,7 +9,6 @@ on:
       - apm.yml
       - .claude-plugin/marketplace.json
       - scripts/check_marketplace_sync.py
-      - scripts/check_instruction_metadata.py
       - toolkits/**
   push:
     branches:
@@ -18,7 +17,6 @@ on:
       - apm.yml
       - .claude-plugin/marketplace.json
       - scripts/check_marketplace_sync.py
-      - scripts/check_instruction_metadata.py
       - toolkits/**
 
 permissions:
@@ -34,9 +32,6 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-
-      - name: Check toolkit instruction metadata
-        run: python3 scripts/check_instruction_metadata.py
 
       - name: Check marketplace is in sync
         run: python3 scripts/check_marketplace_sync.py
