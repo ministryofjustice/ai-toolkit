@@ -3,9 +3,9 @@ name: "Toolkit and Marketplace Checks"
 
 on:
   pull_request:
-    branches:
+    branches: &target_branches
       - main
-    paths:
+    paths: &toolkit_check_paths
       - apm.yml
       - .claude-plugin/marketplace.json
       - scripts/check_instruction_metadata.py
@@ -14,16 +14,8 @@ on:
       - toolkits/**
       - .github/workflows/toolkit-checks.yml
   push:
-    branches:
-      - main
-    paths:
-      - apm.yml
-      - .claude-plugin/marketplace.json
-      - scripts/check_instruction_metadata.py
-      - scripts/check_marketplace_sync.py
-      - scripts/check_toolkit_version_bump.py
-      - toolkits/**
-      - .github/workflows/toolkit-checks.yml
+    branches: *target_branches
+    paths: *toolkit_check_paths
 
 permissions:
   contents: read
