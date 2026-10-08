@@ -59,7 +59,7 @@ To update an existing toolkit:
 1. Increment the toolkit's `version` in `toolkits/<existing-toolkit>/apm.yml`.
 1. Update the matching package version in the root [apm.yml](apm.yml).
 1. Run `apm pack --check-versions --check-clean` to validate the marketplace and
-  regenerate [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json).
+   regenerate [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json).
 1. Commit the toolkit changes, both manifests, and the generated marketplace file.
 
 ## Setup Instructions
