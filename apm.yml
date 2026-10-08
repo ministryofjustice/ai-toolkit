@@ -21,7 +21,7 @@ marketplace:
     - name: universal
       description: Universal Copilot instructions for all Ministry of Justice repositories
       source: ./toolkits/universal
-      version: 1.0.0
+      version: 1.1.0
 
     - name: data-platform-platform-engineering
       description: Data Platform platform engineering Copilot instructions and prompts
