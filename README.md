@@ -51,6 +51,17 @@ empty `.apm/` folder, registers the toolkit in the root [apm.yml](apm.yml) and
 the generated toolkits table above. Add your team's instructions under `.apm/`,
 then commit the changes and open a pull request.
 
+## Maintaining toolkits
+
+To update an existing toolkit:
+
+1. Edit its files under `toolkits/<existing-toolkit>/`.
+1. Increment the toolkit's `version` in `toolkits/<existing-toolkit>/apm.yml`.
+1. Update the matching package version in the root [apm.yml](apm.yml).
+1. Run `apm pack --check-versions --check-clean` to validate the marketplace and
+  regenerate [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json).
+1. Commit the toolkit changes, both manifests, and the generated marketplace file.
+
 ## Setup Instructions
 
 These toolkits are consumed with [APM (Agent Package Manager)](https://github.com/microsoft/apm).
@@ -130,8 +141,8 @@ instructions into the harness (for Copilot, `.github/instructions/`).
 
 ### 3. Track the latest toolkit
 
-Point the toolkit at `main` in `apm.yml` so installs track the latest version,
-then reinstall:
+Point the toolkit at `main` in `apm.yml` so updates can resolve the latest
+commit:
 
 ```yaml
 dependencies:
@@ -140,8 +151,12 @@ dependencies:
 ```
 
 ```bash
-apm install
+apm update
 ```
+
+APM pins the resolved commit in `apm.lock.yaml`. For a new dependency, use
+`apm install`; for an existing dependency, use `apm update` to refresh the
+`#main` reference and update the lockfile.
 
 How a toolkit is surfaced and installed can also vary by AI assistant. See
 [Consume from any assistant](https://microsoft.github.io/apm/producer/publish-to-a-marketplace/#consume-from-any-assistant)
@@ -173,22 +188,3 @@ CLI by hand.
 
 You still declare the required toolkit dependencies in `apm.yml` as shown above
 for your chosen team.
-
-## Maintaining the marketplace
-
-The marketplace is defined by the `marketplace:` block in the root
-[apm.yml](apm.yml) and compiled to
-[.claude-plugin/marketplace.json](.claude-plugin/marketplace.json). To add or
-update a toolkit:
-
-1. Edit the `packages:` list in `apm.yml` (or use `apm marketplace package add ./toolkits/<path>`).
-1. Regenerate and validate the artifact:
-
-   ```bash
-   apm pack --check-versions --check-clean
-   ```
-
-1. Commit both `apm.yml` and the generated `.claude-plugin/marketplace.json`.
-
-Consumers track `main` directly (`#main`), so changes merged to `main` are
-picked up on the next `apm install` without a separate release step.
