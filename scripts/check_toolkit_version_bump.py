@@ -86,7 +86,7 @@ def check_versions(base_revision, head_revision):
         if base_version == head_version:
             errors.append(
                 f"Version remains '{head_version or '(empty)'}' despite toolkit changes. "
-                f"Update the {manifest_path}."
+                f"Update {manifest_path}."
             )
 
     return errors, len(changed_manifests)
