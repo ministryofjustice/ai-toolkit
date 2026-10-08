@@ -9,6 +9,7 @@ on:
       - apm.yml
       - .claude-plugin/marketplace.json
       - scripts/check_marketplace_sync.py
+      - scripts/check_toolkit_version_bump.py
       - toolkits/**
   push:
     branches:
@@ -17,6 +18,7 @@ on:
       - apm.yml
       - .claude-plugin/marketplace.json
       - scripts/check_marketplace_sync.py
+      - scripts/check_toolkit_version_bump.py
       - toolkits/**
 
 permissions:
@@ -32,6 +34,13 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          fetch-depth: 0
+
+      - name: Check changed toolkit versions
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: python3 scripts/check_toolkit_version_bump.py "$BASE_SHA" "$HEAD_SHA"
 
       - name: Check marketplace is in sync
         run: python3 scripts/check_marketplace_sync.py
