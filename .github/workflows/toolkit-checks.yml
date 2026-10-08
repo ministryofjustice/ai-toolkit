@@ -1,5 +1,5 @@
 ---
-name: Marketplace Sync
+name: "Toolkit and Marketplace Checks"
 
 on:
   pull_request:
@@ -8,27 +8,30 @@ on:
     paths:
       - apm.yml
       - .claude-plugin/marketplace.json
+      - scripts/check_instruction_metadata.py
       - scripts/check_marketplace_sync.py
       - scripts/check_toolkit_version_bump.py
       - toolkits/**
+      - .github/workflows/toolkit-checks.yml
   push:
     branches:
       - main
     paths:
       - apm.yml
       - .claude-plugin/marketplace.json
+      - scripts/check_instruction_metadata.py
       - scripts/check_marketplace_sync.py
       - scripts/check_toolkit_version_bump.py
       - toolkits/**
+      - .github/workflows/toolkit-checks.yml
 
 permissions:
   contents: read
 
 jobs:
-  marketplace-sync:
-    name: Marketplace sync
+  toolkit-version:
+    name: Toolkit version bump
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -41,6 +44,27 @@ jobs:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: python3 scripts/check_toolkit_version_bump.py "$BASE_SHA" "$HEAD_SHA"
+
+  instruction-metadata:
+    name: Instruction metadata
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Check toolkit instruction metadata
+        run: python3 scripts/check_instruction_metadata.py
+
+  marketplace-sync:
+    name: Marketplace sync
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Check marketplace is in sync
         run: python3 scripts/check_marketplace_sync.py
