@@ -5,5 +5,5 @@ set -euo pipefail
 # Install pre-commit hooks
 uvx pre-commit install
 
-# Install APM dependencies declared in apm.yml
-apm install
+# Update APM dependencies to the latest matching Git references
+apm update --yes

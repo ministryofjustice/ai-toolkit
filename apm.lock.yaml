@@ -1,44 +1,55 @@
-lockfile_version: "1"
-generated_at: "2026-08-13T13:10:11.654778+00:00"
+lockfile_version: '1'
+generated_at: '2026-10-08T18:56:18.819918+00:00'
 apm_version: 0.28.0
 dependencies:
-  - repo_url: ministryofjustice/ai-toolkit
-    name: universal
-    host: github.com
-    resolved_commit: 90cb6d6bf1ac12d04db9b3b1aa966c1995c30a8a
-    resolved_ref: main
-    version: 1.0.0
-    virtual_path: toolkits/universal
-    is_virtual: true
-    package_type: apm_package
-    deployed_files:
-      - .github/instructions/language.instructions.md
-      - .github/instructions/ministryofjustice.instructions.md
-    deployed_file_hashes:
-      .github/instructions/language.instructions.md: sha256:70e9d0f220f2ceec1cf5b8088c9e199259670f9baa383b330ff3ba9e4107e655
-      .github/instructions/ministryofjustice.instructions.md: sha256:b90d90b99e711ec0823c240f15421cdb2fd03d14aaad7d6622e93f108c5309c5
-    content_hash: sha256:32404084d9e9a4dc1cd48029d883847657f7b8bf464dd91586fb653db208f74a
+- repo_url: ministryofjustice/ai-toolkit
+  name: universal
+  host: github.com
+  resolved_commit: 466a8dd456cb715e56d32c41cfe0bab9aa19ae28
+  resolved_ref: main
+  version: 1.1.0
+  virtual_path: toolkits/universal
+  is_virtual: true
+  package_type: apm_package
+  deployed_files:
+  - .github/instructions/commit.instructions.md
+  - .github/instructions/language.instructions.md
+  - .github/instructions/ministryofjustice.instructions.md
+  deployed_file_hashes:
+    .github/instructions/commit.instructions.md: sha256:dd70841d42937bb61d3cb6b2eb4d4422c2095f15b0ea67513719d86a1750404d
+    .github/instructions/language.instructions.md: sha256:dbbd7951e0cfcdff32b237f1b35ab62ce9f30ceb6c3674f8f1d028a2b7c7c9be
+    .github/instructions/ministryofjustice.instructions.md: sha256:e5f98f5dae901db79b6a869826fb40fcc051fe1ddd057e5fd4dc8d7822e1e652
+  content_hash: sha256:9e3cba66d1ca5a6a1be1ebcbebd312934d46b297ca6d7bd14ea8b9303ed9cc63
 deployments:
-  - kind: project-relative
-    target: copilot
-    value: .github/instructions/language.instructions.md
-    runtime: null
-    scope: project
-    owners:
-      - ministryofjustice/ai-toolkit/toolkits/universal
-    active_owner: ministryofjustice/ai-toolkit/toolkits/universal
-    content_hash: sha256:70e9d0f220f2ceec1cf5b8088c9e199259670f9baa383b330ff3ba9e4107e655
-  - kind: project-relative
-    target: copilot
-    value: .github/instructions/ministryofjustice.instructions.md
-    runtime: null
-    scope: project
-    owners:
-      - ministryofjustice/ai-toolkit/toolkits/universal
-    active_owner: ministryofjustice/ai-toolkit/toolkits/universal
-    content_hash: sha256:b90d90b99e711ec0823c240f15421cdb2fd03d14aaad7d6622e93f108c5309c5
+- kind: project-relative
+  target: copilot
+  value: .github/instructions/commit.instructions.md
+  runtime: null
+  scope: project
+  owners:
+  - ministryofjustice/ai-toolkit/toolkits/universal
+  active_owner: ministryofjustice/ai-toolkit/toolkits/universal
+  content_hash: sha256:dd70841d42937bb61d3cb6b2eb4d4422c2095f15b0ea67513719d86a1750404d
+- kind: project-relative
+  target: copilot
+  value: .github/instructions/language.instructions.md
+  runtime: null
+  scope: project
+  owners:
+  - ministryofjustice/ai-toolkit/toolkits/universal
+  active_owner: ministryofjustice/ai-toolkit/toolkits/universal
+  content_hash: sha256:dbbd7951e0cfcdff32b237f1b35ab62ce9f30ceb6c3674f8f1d028a2b7c7c9be
+- kind: project-relative
+  target: copilot
+  value: .github/instructions/ministryofjustice.instructions.md
+  runtime: null
+  scope: project
+  owners:
+  - ministryofjustice/ai-toolkit/toolkits/universal
+  active_owner: ministryofjustice/ai-toolkit/toolkits/universal
+  content_hash: sha256:e5f98f5dae901db79b6a869826fb40fcc051fe1ddd057e5fd4dc8d7822e1e652
 mcp_servers:
-  - github
+- github
 mcp_configs:
   github:
     name: github
