@@ -28,6 +28,12 @@
       "description": "Copilot skills for generating project documentation",
       "version": "1.0.0",
       "source": "./toolkits/eucs-app-platforms/documentation"
+    },
+    {
+      "name": "ai-enablement-engineering",
+      "description": "AI Enablement Toolkit",
+      "version": "1.0.0",
+      "source": "./toolkits/ai-enablement/engineering"
     }
   ]
 }
