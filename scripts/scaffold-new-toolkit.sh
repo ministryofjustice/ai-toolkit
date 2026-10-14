@@ -41,7 +41,10 @@ validate_slug "toolkit name" "$TOOLKIT_NAME"
 title_case() {
   local words=() word
   for word in ${1//-/ }; do
-    words+=("${word^}")
+    case "$word" in
+      ai) words+=("AI") ;;
+      *) words+=("${word^}") ;;
+    esac
   done
   echo "${words[*]}"
 }
