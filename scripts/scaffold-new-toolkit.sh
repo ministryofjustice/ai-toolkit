@@ -42,8 +42,8 @@ title_case() {
   local words=() word
   for word in ${1//-/ }; do
     case "$word" in
-      ai) words+=("AI") ;;
-      *) words+=("${word^}") ;;
+    ai) words+=("AI") ;;
+    *) words+=("${word^}") ;;
     esac
   done
   echo "${words[*]}"
