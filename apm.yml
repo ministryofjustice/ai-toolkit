@@ -38,7 +38,7 @@ marketplace:
       source: ./toolkits/eucs-app-platforms/documentation
       version: 1.0.0
 
-    - name: engineering-ai-enablement-engineering
-      description: Engineering AI Enablement Toolkit
-      source: ./toolkits/engineering-ai-enablement/engineering
+    - name: ai-enablement-engineering
+      description: AI Enablement Toolkit
+      source: ./toolkits/ai-enablement/engineering
       version: 1.0.0

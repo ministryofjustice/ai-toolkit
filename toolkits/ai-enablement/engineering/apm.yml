@@ -1,7 +1,7 @@
 ---
-name: engineering-ai-enablement-engineering
+name: ai-enablement-engineering
 version: 1.0.0
-description: Engineering AI Enablement Toolkit
+description: AI Enablement Toolkit
 author: "@justice-engineering-ai-enablement"
 targets:
   - copilot
