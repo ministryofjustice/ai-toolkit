@@ -30,8 +30,8 @@ require a Java toolkit dependency.
 
 | Guidance                                                               | Contents                                                                                                                                                              |
 | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Data stewardship](.apm/instructions/data-stewardship.instructions.md) | S1-S11: ownership, contracts, consumer-policy boundaries, access and attribution, store classification, privacy, retention, transactions, delivery and framework risk |
-| [Event sourcing](.apm/instructions/event-sourcing.instructions.md)     | E1-E7: sourced state, stream concurrency, retention facts, atomic coordination, replay, persisted-event compatibility and evidence                                    |
+| [Data stewardship](.apm/instructions/data-stewardship.instructions.md) | S1-S12: ownership, contracts, consumer-policy boundaries, access and attribution, store classification, privacy, retention, transactions, delivery, framework risk and authoritative write decisions |
+| [Event sourcing](.apm/instructions/event-sourcing.instructions.md)     | E1-E8: sourced state, stream concurrency, retention facts, atomic coordination, replay, persisted-event compatibility, evidence and read-model independence of commands |
 
 All items remain open to challenge. Applicability, confidence and concrete
 mechanisms should be tested against each service's domain and evidence.

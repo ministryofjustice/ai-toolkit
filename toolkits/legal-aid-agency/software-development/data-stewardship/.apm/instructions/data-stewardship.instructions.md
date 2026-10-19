@@ -192,3 +192,22 @@ source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/legal
 - Turn important mechanically detectable boundaries into architecture checks,
   and use transaction, concurrency and recovery evidence appropriate to the
   risk.
+
+## S12. Keep Write Decisions Grounded in Authoritative State
+
+- Do not use derived read models as the authority for write validation,
+  authorisation, lifecycle transitions or required membership, existence,
+  uniqueness and duplicate checks. This applies whether or not the service uses
+  event sourcing.
+- Apply the boundary throughout the write path, including controllers,
+  application services, handlers and coordination code. Classify stores under
+  S6; a repository's name or synchronous update mechanism does not establish
+  its authority or protect a check against concurrent changes.
+- Protect required checks through commit using the owning service's concurrency,
+  transaction or atomic constraint mechanisms. Reading authoritative state alone
+  does not prevent a check-then-write race.
+- Derived views may inform advisory checks or consumer recommendations, but must
+  not replace authoritative enforcement. Record tolerated staleness, race
+  outcomes and recovery behaviour in a service decision record.
+- For event-sourced services, E8 applies this boundary to command paths, event
+  content and process coordination.

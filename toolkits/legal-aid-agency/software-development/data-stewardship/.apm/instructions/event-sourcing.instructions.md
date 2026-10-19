@@ -27,7 +27,8 @@ source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/legal
   authority.
 - Keep each aggregate's state to the facts needed to enforce its stewardship
   invariants.
-- Do not query asynchronous projections to decide aggregate command validity.
+- Do not query asynchronous projections to decide aggregate command validity;
+  E8 applies this to the whole command path.
 - Command handlers may load authoritative referenced payloads for validation or
   to construct the next payload; event-sourcing handlers must not perform that
   I/O.
@@ -94,8 +95,8 @@ source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/legal
 - Subscribing processing is not proof of multi-aggregate atomicity. Streaming
   processing is not a substitute for an all-or-nothing invariant.
 - A read-side precondition is acceptable only where its staleness and
-  monotonicity assumptions are justified. Human-speed actors do not eliminate
-  races.
+  monotonicity assumptions are justified and recorded as E8 requires.
+  Human-speed actors do not eliminate races.
 
 ## E5. Separate Replay from Live Side Effects
 
@@ -145,3 +146,39 @@ source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/legal
   test does not establish a complete, inexpensive framework exit.
 - Do not infer runtime, production or privacy acceptance from a passing unit or
   fixture suite.
+
+## E8. Keep Command-Side Decisions Off the Read Model
+
+- Apply this to the whole command path: controllers, application services,
+  command handlers, aggregates, process managers, sagas and helpers they call,
+  not only aggregate command validity. S12 states the general stewardship rule.
+- Base decisions that enforce invariants on authoritative state, including the
+  owning stream, authoritative payloads classified under S6 and facts owned by
+  authoritative external services. Do not treat query projections, read-model
+  repositories or projection entities as authority for command acceptance,
+  authorisation or required routing.
+- Do not silently promote projected values into authoritative facts in new
+  events or payloads. A deliberate record of a historical observation must
+  identify its source, observation time and freshness limits, and must not be
+  treated as proof of current authoritative state.
+- Do not use projections for uniqueness, existence or duplicate checks that
+  must hold. Protect the check through commit with stream concurrency, atomic
+  create-if-absent, a unique constraint on owned transactional state or another
+  mechanism that enforces the invariant. A deterministic identifier alone is
+  not atomic enforcement.
+- Process managers and sagas may use handled events, their persisted process
+  state and authoritative service or payload reads where required. Do not use
+  another processor's projection as invariant authority. Protect local process
+  transitions against concurrent handling, and require receiving command
+  handlers to enforce their own invariants against authoritative state.
+- A command response must not present projection state as the committed
+  result. Return what the command established, such as identifiers and stream
+  versions, and let callers read the model under its stated freshness.
+- Where a read-side check is genuinely acceptable, record its purpose, tolerated
+  staleness, the outcome if a race occurs and how that outcome is detected or
+  corrected in a service decision record. Treat it as advisory, never as the
+  invariant's only protection. A stale advisory result may still reject valid
+  work; document that observable behaviour too.
+- Make the boundary mechanically checkable where practical, for example with an
+  architecture test preventing command-side packages from depending on query
+  repositories or projection entities.
