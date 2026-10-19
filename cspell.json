@@ -8,6 +8,7 @@
     "CCCD",
     "cicd",
     "cooldown",
+    "deserialisation",
     "docstrings",
     "DOMIS",
     "eucs",
@@ -27,11 +28,14 @@
     "pytest",
     "querysets",
     "SemVer",
+    "serialiser",
     "SonarQube",
     "teardown",
     "tfvars",
     "toolkits",
     "unhandleable",
+    "upcaster",
+    "upcasting",
     "WCAG",
     "zizmor"
   ]
