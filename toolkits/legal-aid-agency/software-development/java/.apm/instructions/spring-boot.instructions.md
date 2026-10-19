@@ -14,7 +14,7 @@ applyTo: "**/*.java,**/application*.yml,**/application*.yaml,**/application*.pro
 - Use valid Java packages beneath `uk.gov.justice.laa.<service>` for new services rather than copying kebab-case repository names into packages.
 - Keep HTTP translation in controllers, use cases and business rules in services, persistence in repositories, and representation conversion in mappers.
 - Use constructor injection and final dependencies; follow the repository's use of explicit constructors or Lombok `@RequiredArgsConstructor`.
-- Replace template examples, placeholders, demo data and configuration before release. Complete the service README, CODEOWNERS and deployment configuration.
+- Replace template examples, placeholders, demo data and configuration before release. Complete the service readme, CODEOWNERS and deployment configuration.
 
 ## Object Mapping
 

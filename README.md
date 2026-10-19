@@ -27,7 +27,7 @@ This section is generated from the `toolkits/` directory by `scripts/update-read
 | Data Platform      | [platform-engineering](toolkits/data-platform/platform-engineering)              | Data Platform platform engineering instructions.         |
 | Data Platform      | [software-engineering](toolkits/data-platform/software-engineering)              | Data Platform software engineering instructions.         |
 | EUCS App Platforms | [documentation](toolkits/eucs-app-platforms/documentation)                       | EUCS App Platforms Documentation instructions.           |
-| Legal Aid Agency   | [software-development/java](toolkits/legal-aid-agency/software-development/java) | Legal Aid Agency Java Software Development instructions. |
+| Legal Aid Agency   | [software-development/Java](toolkits/legal-aid-agency/software-development/java) | Legal Aid Agency Java Software Development instructions. |
 
 <!-- END GENERATED TOOLKITS -->
 

@@ -8,7 +8,7 @@ applyTo: "**"
 
 ## Before Making Changes
 
-- Read the repository README, local instructions, relevant Gradle configuration, source files, tests and CI before editing.
+- Read the repository readme, local instructions, relevant Gradle configuration, source files, tests and CI before editing.
 - Identify affected modules, API contracts, dependencies and established patterns. Check which optional technologies are actually used before applying their guidance.
 - Use the repository's declared Java toolchain, Spring Boot compatibility line and plugin versions; do not assume it follows the latest template.
 - Apply mandatory security controls throughout. Use the technology defaults in this package for new services; preserve established choices in existing applications unless changing them is part of the task.

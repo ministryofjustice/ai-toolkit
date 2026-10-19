@@ -29,7 +29,7 @@ applyTo: "**/*.java,**/db/migration/**,**/application*.yml,**/application*.yaml,
 - Never modify a migration that may have been applied to a shared environment; create a new versioned migration.
 - Keep Hibernate schema creation and updates disabled in deployed environments; use `ddl-auto: none` or explicitly agreed schema validation.
 - Keep demonstration seed data out of deployed migrations unless it is deliberately required reference data.
-- Assess backwards compatibility, locking, constraints, indexes, data preservation and rollback implications. Prefer expand/contract changes.
+- Assess backwards compatibility, locking, constraints, indices, data preservation and rollback implications. Prefer expand/contract changes.
 - Test clean schema creation and relevant upgrade paths using the adopted migration tooling.
 - Document recovery or forward-fix for destructive changes; application rollback alone cannot restore lost data.
 - Do not execute destructive migrations against shared or deployed databases without explicit authorisation and human review of the migration and recovery plan.

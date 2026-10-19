@@ -186,6 +186,9 @@ generate_rows_for_family() {
     if [[ "$toolkit_dir" != "$family_dir" ]]; then
       toolkit_display="${toolkit_dir#"$family_dir"/}"
     fi
+    if [[ "$toolkit_name" == "java" ]]; then
+      toolkit_display="${toolkit_display%java}Java"
+    fi
 
     description="$(normalize_description "$family_name" "$family_display" "$toolkit_name" "$(extract_description "$manifest")")"
 
