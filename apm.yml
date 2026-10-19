@@ -37,3 +37,8 @@ marketplace:
       description: Copilot skills for generating project documentation
       source: ./toolkits/eucs-app-platforms/documentation
       version: 1.0.0
+
+    - name: legal-aid-agency-software-development-data-stewardship
+      description: Legal Aid Agency data stewardship software development Copilot instructions
+      source: ./toolkits/legal-aid-agency/software-development/data-stewardship
+      version: 1.0.0

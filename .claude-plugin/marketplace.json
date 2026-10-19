@@ -28,6 +28,12 @@
       "description": "Copilot skills for generating project documentation",
       "version": "1.0.0",
       "source": "./toolkits/eucs-app-platforms/documentation"
+    },
+    {
+      "name": "legal-aid-agency-software-development-data-stewardship",
+      "description": "Legal Aid Agency data stewardship software development Copilot instructions",
+      "version": "1.0.0",
+      "source": "./toolkits/legal-aid-agency/software-development/data-stewardship"
     }
   ]
 }

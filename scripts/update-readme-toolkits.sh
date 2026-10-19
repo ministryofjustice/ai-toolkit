@@ -164,7 +164,7 @@ generate_rows_for_family() {
 
   family_name="$(basename "$family_dir")"
   family_display="$(title_case "$family_name")"
-  manifests="$(find "$family_dir" -mindepth 1 -maxdepth 2 -type f -name 'apm.yml' | sort || true)"
+  manifests="$(find "$family_dir" -mindepth 1 -type f -name 'apm.yml' | sort || true)"
 
   if [[ -z "$manifests" ]]; then
     return 0
@@ -183,6 +183,12 @@ generate_rows_for_family() {
     rel_toolkit_dir="${toolkit_dir#"$ROOT_DIR"/}"
     toolkit_name="$(basename "$toolkit_dir")"
     toolkit_display="$toolkit_name"
+    if [[ "$toolkit_dir" != "$family_dir" ]]; then
+      toolkit_display="${toolkit_dir#"$family_dir"/}"
+    fi
+    if [[ "$toolkit_name" == "java" ]]; then
+      toolkit_display="${toolkit_display%java}Java"
+    fi
 
     description="$(normalize_description "$family_name" "$family_display" "$toolkit_name" "$(extract_description "$manifest")")"
 
