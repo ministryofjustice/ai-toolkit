@@ -24,7 +24,8 @@ applyTo: "**"
 - Preserve authentication, authorisation, validation, logging and error-handling behaviour unless an intentional change is required.
 - Maintain security settings and quality gates. Never disable tests, lower coverage requirements, broaden exclusions or suppress checks to make a change pass.
 - Keep secrets, credentials, personal data and sensitive case information out of source code, fixtures and logs; use synthetic test data.
-- Obtain explicit authorisation before destructive operations on shared or deployed resources, including migrations and changes that weaken deployment security.
+- Keep destructive database migrations against shared, deployed or production databases under direct human ownership and execution. The agent may analyse, discuss and recommend them, but must never execute, approve or apply them, even with authorisation.
+- Obtain explicit authorisation before other destructive operations on shared or deployed resources or changes that weaken deployment security.
 
 ## Testing and Verification
 

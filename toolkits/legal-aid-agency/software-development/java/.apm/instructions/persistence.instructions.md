@@ -32,4 +32,4 @@ applyTo: "**/*.java,**/db/migration/**,**/application*.yml,**/application*.yaml,
 - Assess backwards compatibility, locking, constraints, indices, data preservation and rollback implications. Prefer expand/contract changes.
 - Test clean schema creation and relevant upgrade paths using the adopted migration tooling.
 - Document recovery or forward-fix for destructive changes; application rollback alone cannot restore lost data.
-- Do not execute destructive migrations against shared or deployed databases without explicit authorisation and human review of the migration and recovery plan.
+- The agent may analyse, discuss and recommend database migrations, but must never execute, approve or apply destructive migrations against shared, deployed or production databases. Such actions must always remain under direct human ownership and execution.
