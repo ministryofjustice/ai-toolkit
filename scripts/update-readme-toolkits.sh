@@ -22,8 +22,8 @@ title_case() {
   local value="$1"
   echo "$value" | tr '-' ' ' | awk '{
     for (i = 1; i <= NF; i++) {
-      if (tolower($i) == "eucs") {
-        $i = "EUCS"
+      if (tolower($i) == "eucs" || tolower($i) == "laa") {
+        $i = toupper($i)
       } else {
         $i = toupper(substr($i, 1, 1)) substr($i, 2)
       }
@@ -164,7 +164,7 @@ generate_rows_for_family() {
 
   family_name="$(basename "$family_dir")"
   family_display="$(title_case "$family_name")"
-  manifests="$(find "$family_dir" -mindepth 1 -maxdepth 2 -type f -name 'apm.yml' | sort || true)"
+  manifests="$(find "$family_dir" -mindepth 1 -type f -name 'apm.yml' | sort || true)"
 
   if [[ -z "$manifests" ]]; then
     return 0
@@ -183,6 +183,9 @@ generate_rows_for_family() {
     rel_toolkit_dir="${toolkit_dir#"$ROOT_DIR"/}"
     toolkit_name="$(basename "$toolkit_dir")"
     toolkit_display="$toolkit_name"
+    if [[ "$toolkit_dir" != "$family_dir" ]]; then
+      toolkit_display="${toolkit_dir#"$family_dir"/}"
+    fi
 
     description="$(normalize_description "$family_name" "$family_display" "$toolkit_name" "$(extract_description "$manifest")")"
 

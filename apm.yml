@@ -37,3 +37,8 @@ marketplace:
       description: Copilot skills for generating project documentation
       source: ./toolkits/eucs-app-platforms/documentation
       version: 1.0.0
+
+    - name: legal-aid-agency-software-development-java
+      description: Legal Aid Agency Java software development Copilot instructions
+      source: ./toolkits/legal-aid-agency/software-development/java
+      version: 1.0.0
