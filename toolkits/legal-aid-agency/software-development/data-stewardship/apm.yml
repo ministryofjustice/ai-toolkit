@@ -1,0 +1,12 @@
+---
+name: legal-aid-agency-software-development-data-stewardship
+version: 1.0.0
+description: Legal Aid Agency Data Stewardship Software Development Toolkit
+author: Legal Aid Agency
+targets:
+  - copilot
+dependencies:
+  apm: []
+  mcp: []
+includes: auto
+scripts: {}
