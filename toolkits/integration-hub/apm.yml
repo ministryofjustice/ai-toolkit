@@ -1,0 +1,12 @@
+---
+name: integration-hub
+version: 1.0.0
+description: Integration Hub Toolkit
+author: Integration Hub Team
+targets:
+  - copilot
+dependencies:
+  apm: []
+  mcp: []
+includes: auto
+scripts: {}
