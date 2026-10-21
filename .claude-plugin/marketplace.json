@@ -28,6 +28,12 @@
       "description": "Copilot skills for generating project documentation",
       "version": "1.0.0",
       "source": "./toolkits/eucs-app-platforms/documentation"
+    },
+    {
+      "name": "integration-hub-engineering",
+      "description": "Integration Hub Engineering Copilot instructions",
+      "version": "1.0.0",
+      "source": "./toolkits/integration-hub/engineering"
     }
   ]
 }

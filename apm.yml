@@ -37,3 +37,8 @@ marketplace:
       description: Copilot skills for generating project documentation
       source: ./toolkits/eucs-app-platforms/documentation
       version: 1.0.0
+
+    - name: integration-hub-engineering
+      description: Integration Hub Engineering Copilot instructions
+      source: ./toolkits/integration-hub/engineering
+      version: 1.0.0
