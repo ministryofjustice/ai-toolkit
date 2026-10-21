@@ -15,12 +15,12 @@ source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/integ
 Resources should be grouped in files which are based on their name. For example:
 
 - IAM roles and policies should be grouped according to their consuming modules or resources
-  - E.G. `iam-guardduty.tf`
-  - E.G. `iam-transfer.tf`
+  - E.g. `iam-guardduty.tf`
+  - E.g. `iam-transfer.tf`
 - KMS keys should be placed in `kms-keys.tf`
 - Local values should be grouped according to their consumer
-  - E.G. `locals-iam.tf`
-  - E.G. `locals-kms.tf`
+  - E.g. `locals-iam.tf`
+  - E.g. `locals-kms.tf`
 
 Reusable local modules should be placed in `modules/`
 
