@@ -5,7 +5,7 @@ source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/integ
 
 # Pull Request Style Guide
 
-# Pull Request Instructions
+## Pull Request Instructions
 
 When creating or updating a pull request:
 
