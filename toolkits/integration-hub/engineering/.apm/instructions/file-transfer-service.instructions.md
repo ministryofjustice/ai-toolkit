@@ -66,7 +66,7 @@ including service-managed provenance.
 Do not generalise this deletion behaviour to downstream delivery: the
 existing S3 delivery patterns copy the clean source and retain it.
 
-S3 lifecycle rules expire objects from the terminal buckets (clean, 
+S3 lifecycle rules expire objects from the terminal buckets (clean,
 quarantine, and investigation).
 
 ### Fail closed at the malware boundary
