@@ -8,9 +8,10 @@ source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/integ
 ## Structure
 
 - data sources should be grouped with the relevant consuming modules or resources
-- providers and versions should be placed in `terraform.tf`
-- variables should be placed in `variables.tf`
 - outputs should be placed in `outputs.tf`
+- provider blocks should be placed in `providers.tf`
+- variables should be placed in `variables.tf`
+- version blocks should be placed in `versions.tf`
 
 Resources should be grouped in files which are based on their name. For example:
 
