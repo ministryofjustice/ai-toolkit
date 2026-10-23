@@ -5,6 +5,7 @@ Checks that the set of toolkits (each toolkits/**/apm.yml), the marketplace
 packages in the root apm.yml, and the plugins in
 .claude-plugin/marketplace.json all agree on the same sources, and that the
 name, description and version for each package match its plugin.
+Each toolkit's own version must also match both catalogue entries.
 
 Kept dependency-free (standard library only, no PyYAML) so it runs anywhere.
 
@@ -14,6 +15,8 @@ Usage: scripts/check_marketplace_sync.py
 import json
 import os
 import sys
+
+from check_toolkit_version_bump import read_version
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APM_MANIFEST = os.path.join(ROOT, "apm.yml")
@@ -75,13 +78,14 @@ def parse_packages(path):
     return packages
 
 
-def collect_disk_sources():
-    """Return the set of toolkit sources found on disk."""
-    sources = set()
+def collect_toolkit_versions():
+    """Return toolkit sources and their manifest versions from disk."""
+    versions = {}
     for current_dir, _dirs, files in os.walk(TOOLKITS_DIR):
         if "apm.yml" in files:
-            sources.add(normalise(current_dir))
-    return sources
+            with open(os.path.join(current_dir, "apm.yml"), encoding="utf-8") as handle:
+                versions[normalise(current_dir)] = read_version(handle.read())
+    return versions
 
 
 def index_by_source(entries):
@@ -131,6 +135,7 @@ def field_mismatches(source, package, plugin):
 
 def find_errors(disk, packages, package_duplicates, plugins, plugin_duplicates):
     """Return sync errors across disk, apm.yml and marketplace.json."""
+    disk_sources = set(disk)
     package_sources = set(packages)
     plugin_sources = set(plugins)
     errors = []
@@ -139,11 +144,11 @@ def find_errors(disk, packages, package_duplicates, plugins, plugin_duplicates):
         errors.append(f"apm.yml lists multiple packages with source '{source}'.")
     for source in sorted(plugin_duplicates):
         errors.append(f"marketplace.json lists multiple plugins with source '{source}'.")
-    for source in sorted(disk - package_sources):
+    for source in sorted(disk_sources - package_sources):
         errors.append(
             f"Toolkit '{source}' has no matching package in apm.yml (marketplace.packages)."
         )
-    for source in sorted(package_sources - disk):
+    for source in sorted(package_sources - disk_sources):
         errors.append(f"apm.yml lists package '{source}' but no toolkit exists at that path.")
     for source in sorted(package_sources - plugin_sources):
         errors.append(
@@ -156,6 +161,23 @@ def find_errors(disk, packages, package_duplicates, plugins, plugin_duplicates):
     for source in sorted(package_sources & plugin_sources):
         errors.extend(field_mismatches(source, packages[source], plugins[source]))
 
+    for source, version in sorted(disk.items()):
+        if not version:
+            errors.append(f"Toolkit '{source}/apm.yml' has no non-empty top-level version.")
+            continue
+        for label, catalogue in (
+            ("root apm.yml", packages),
+            ("marketplace.json", plugins),
+        ):
+            if source in catalogue and catalogue[source].get("version") != version:
+                actual = catalogue[source].get("version")
+                errors.append(
+                    f"Version mismatch for '{source}': toolkit apm.yml='{version}' "
+                    f"but {label}='{actual}'. Update the matching package version "
+                    "in root apm.yml and regenerate .claude-plugin/marketplace.json "
+                    "with: apm pack --check-versions --check-clean."
+                )
+
     return errors
 
 
@@ -164,7 +186,7 @@ def main():
     packages, package_duplicates = collect_packages()
     plugins, plugin_duplicates = collect_plugins()
     errors = find_errors(
-        collect_disk_sources(),
+        collect_toolkit_versions(),
         packages,
         package_duplicates,
         plugins,
@@ -175,6 +197,9 @@ def main():
         print("Marketplace is out of sync:")
         for error in errors:
             print(f"  - {error}")
+            if os.environ.get("GITHUB_ACTIONS") == "true":
+                message = error.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+                print(f"::error file=.claude-plugin/marketplace.json::{message}")
         print()
         print("Regenerate it with: apm pack --check-versions --check-clean")
         print("or scaffold new toolkits with: scripts/scaffold-new-toolkit.sh <team> [toolkit]")
