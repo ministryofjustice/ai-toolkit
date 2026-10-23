@@ -1,6 +1,6 @@
 ---
 description: File Transfer Service Instructions
-source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/integration-hub/.apm/instructions/file-transfer-service.instructions.md
+source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/integration-hub/engineering/.apm/instructions/file-transfer-service.instructions.md
 ---
 
 # File Transfer Service Instructions
