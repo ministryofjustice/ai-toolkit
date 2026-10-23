@@ -16,9 +16,9 @@ class MarketplaceSyncTests(unittest.TestCase):
     """Exercise the command against a small marketplace on disk."""
 
     def setUp(self):
-        self.directory = tempfile.TemporaryDirectory()
-        self.addCleanup(self.directory.cleanup)
-        self.root = Path(self.directory.name)
+        # unittest closes the context after the test, not when setUp returns.
+        # pylint: disable-next=consider-using-with
+        self.root = Path(self.enterContext(tempfile.TemporaryDirectory()))
         self.source = "./toolkits/example/engineering"
         self.toolkit = self.root / "toolkits/example/engineering/apm.yml"
         self.toolkit.parent.mkdir(parents=True)
@@ -39,8 +39,7 @@ class MarketplaceSyncTests(unittest.TestCase):
     def write_versions(self, toolkit, package, plugin):
         """Write a toolkit and its two catalogue entries."""
         self.toolkit.write_text(
-            f"---\nname: example\nversion: {toolkit}\n"
-            "dependencies:\n  version: ignored\n",
+            f"---\nname: example\nversion: {toolkit}\ndependencies:\n  version: ignored\n",
             encoding="utf-8",
         )
         self.manifest.write_text(
@@ -73,10 +72,12 @@ class MarketplaceSyncTests(unittest.TestCase):
         return status, output.getvalue()
 
     def test_matching_versions_pass(self):
+        """Accept a toolkit whose catalogue versions agree."""
         status, _ = self.run_check()
         self.assertEqual(status, 0)
 
     def test_both_catalogues_stale_fail(self):
+        """Reject equally stale catalogues and annotate the CI failure."""
         self.write_versions("1.2.0", "1.0.0", "1.0.0")
         with patch.dict(os.environ, {"GITHUB_ACTIONS": "true"}):
             status, output = self.run_check()
@@ -87,6 +88,7 @@ class MarketplaceSyncTests(unittest.TestCase):
         self.assertIn("apm pack --check-versions --check-clean", output)
 
     def test_one_catalogue_stale_fails(self):
+        """Reject a stale version in either catalogue."""
         for package, plugin in (("1.0.0", "1.2.0"), ("1.2.0", "1.0.0")):
             with self.subTest(package=package, plugin=plugin):
                 self.write_versions("1.2.0", package, plugin)
@@ -95,6 +97,7 @@ class MarketplaceSyncTests(unittest.TestCase):
                 self.assertIn("Version mismatch", output)
 
     def test_missing_or_empty_toolkit_version_fails(self):
+        """Require a non-empty version in the toolkit manifest."""
         for content in ("name: example\n", "version:\n", "version: ''\n"):
             with self.subTest(content=content):
                 self.toolkit.write_text(content, encoding="utf-8")
@@ -103,17 +106,20 @@ class MarketplaceSyncTests(unittest.TestCase):
                 self.assertIn("no non-empty top-level version", output)
 
     def test_quoted_toolkit_version_passes(self):
+        """Accept quoted YAML version scalars."""
         self.write_versions("'1.2.0'", "1.2.0", "1.2.0")
         status, _ = self.run_check()
         self.assertEqual(status, 0)
 
     def test_missing_catalogue_versions_fail(self):
+        """Reject missing or empty catalogue versions."""
         self.write_versions("1.2.0", "", None)
         status, output = self.run_check()
         self.assertEqual(status, 1)
         self.assertIn("Version mismatch", output)
 
     def test_existing_catalogue_metadata_check_is_preserved(self):
+        """Continue rejecting inconsistent catalogue descriptions."""
         self.marketplace.write_text(
             self.marketplace.read_text(encoding="utf-8").replace(
                 "Example toolkit", "Different description"
@@ -125,6 +131,7 @@ class MarketplaceSyncTests(unittest.TestCase):
         self.assertIn("field 'description'", output)
 
     def test_missing_toolkit_still_fails(self):
+        """Continue rejecting catalogue entries without a toolkit."""
         self.toolkit.unlink()
         status, output = self.run_check()
         self.assertEqual(status, 1)
