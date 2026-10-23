@@ -63,6 +63,11 @@ To update an existing toolkit:
    regenerate [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json).
 1. Commit the toolkit changes, both manifests, and the generated marketplace file.
 
+CI checks that changed toolkits have a version bump and that each toolkit's
+version matches its entries in the root `apm.yml` and `marketplace.json`.
+The **Marketplace sync** check fails and annotates the pull request if these
+versions differ, even when both catalogue entries contain the same stale version.
+
 ## Setup Instructions
 
 These toolkits are consumed with [APM (Agent Package Manager)](https://github.com/microsoft/apm).
