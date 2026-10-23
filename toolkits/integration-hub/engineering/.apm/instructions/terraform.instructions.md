@@ -1,5 +1,5 @@
 ---
-description: Terraform instructions
+description: "Integration Hub Terraform instructions. Relevant when working on Terraform files linked to the @ministryofjustice/integration-hub GitHub team."
 source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/integration-hub/.apm/instructions/terraform.instructions.md
 ---
 
