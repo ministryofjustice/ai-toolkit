@@ -1,5 +1,5 @@
 ---
-description: File Transfer Service Instructions
+description: "Integration Hub File Transfer Service Instructions. Relevant when working on the Integration Hub File Transfer service."
 source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/integration-hub/engineering/.apm/instructions/file-transfer-service.instructions.md
 ---
 
