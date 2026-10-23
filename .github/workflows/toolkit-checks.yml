@@ -11,6 +11,7 @@ on:
       - scripts/check_instruction_metadata.py
       - scripts/check_marketplace_sync.py
       - scripts/check_toolkit_version_bump.py
+      - scripts/test_marketplace_sync.py
       - toolkits/**
       - .github/workflows/toolkit-checks.yml
   push:
@@ -57,6 +58,9 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+
+      - name: Test marketplace sync check
+        run: python3 -m unittest discover -s scripts -p 'test_marketplace_sync.py'
 
       - name: Check marketplace is in sync
         run: python3 scripts/check_marketplace_sync.py
