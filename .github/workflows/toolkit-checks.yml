@@ -3,10 +3,11 @@ name: "Toolkit and Marketplace Checks"
 
 on:
   pull_request:
-    branches: &target_branches
-      - main
     paths: &toolkit_check_paths
       - apm.yml
+      - apm.lock.yaml
+      - .github/instructions/**
+      - .vscode/mcp.json
       - .claude-plugin/marketplace.json
       - scripts/check_instruction_metadata.py
       - scripts/check_marketplace_sync.py
@@ -14,13 +15,35 @@ on:
       - toolkits/**
       - .github/workflows/toolkit-checks.yml
   push:
-    branches: *target_branches
+    branches:
+      - main
     paths: *toolkit_check_paths
 
 permissions:
   contents: read
 
 jobs:
+  apm-audit:
+    name: APM integrity audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up APM
+        uses: microsoft/apm-action@d723bb64ed70c135bbaf87d126b721dd2dae0439 # v1.10.0
+        with:
+          apm-version: "0.28.0"
+          # Do not overwrite committed deployments before checking for drift.
+          setup-only: true
+
+      - name: Audit committed APM files
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: apm audit --ci
+
   toolkit-version:
     name: Toolkit version bump
     runs-on: ubuntu-latest
