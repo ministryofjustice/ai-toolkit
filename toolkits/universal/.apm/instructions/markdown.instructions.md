@@ -1,0 +1,23 @@
+---
+description: Markdown formatting instructions
+source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/universal/.apm/instructions/markdown.instructions.md
+applyTo: "**/*.md"
+---
+
+# Markdown
+
+When creating or editing ordered lists in Markdown files, use `1.` as the marker
+for every item rather than incrementing the source numbers (`1.`, `2.`, `3.`).
+Markdown renderers display the sequential numbering automatically.
+
+Leave a blank line between list items:
+
+```markdown
+1. First item.
+
+1. Second item.
+
+1. Third item.
+```
+
+Apply the same convention to nested ordered lists, preserving their indentation.
