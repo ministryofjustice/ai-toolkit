@@ -36,7 +36,7 @@ jobs:
       - name: Set up APM
         uses: microsoft/apm-action@d723bb64ed70c135bbaf87d126b721dd2dae0439 # v1.10.0
         with:
-          apm-version: "0.28.0"
+          apm-version: "latest"
           # Do not overwrite committed deployments before checking for drift.
           setup-only: true
 
