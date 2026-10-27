@@ -1,0 +1,12 @@
+---
+name: ai-enablement-engineering
+version: 1.0.0
+description: AI Enablement Toolkit
+author: "@justice-engineering-ai-enablement"
+targets:
+  - copilot
+dependencies:
+  apm: []
+  mcp: []
+includes: auto
+scripts: {}
