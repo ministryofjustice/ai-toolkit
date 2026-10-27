@@ -27,7 +27,7 @@ This section is generated from the `toolkits/` directory by `scripts/update-read
 | Data Platform      | [platform-engineering](toolkits/data-platform/platform-engineering) | Data Platform platform engineering instructions.                                                   |
 | Data Platform      | [software-engineering](toolkits/data-platform/software-engineering) | Data Platform software engineering instructions.                                                   |
 | EUCS App Platforms | [documentation](toolkits/eucs-app-platforms/documentation)          | EUCS App Platforms Documentation instructions.                                                     |
-| Integration Hub    | [engineering](toolkits/integration-hub/engineering)                 | Integration Hub engineering toolkit for the Ministry of Justice Integration Hub team instructions. |
+| Integration Hub    | [engineering](toolkits/integration-hub/engineering)                 | Integration Hub engineering toolkit for the Ministry of Justice integration hub team instructions. |
 
 <!-- END GENERATED TOOLKITS -->
 
