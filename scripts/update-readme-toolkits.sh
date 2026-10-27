@@ -153,7 +153,12 @@ normalize_description() {
     return
   fi
 
-  echo "$family_display $(echo "$description" | tr '[:upper:]' '[:lower:]') instructions."
+  description="$(echo "$description" | tr '[:upper:]' '[:lower:]')"
+  if [[ "$description" == *"ministry of justice"* ]]; then
+    description="${description//ministry of justice/Ministry of Justice}"
+  fi
+
+  echo "$family_display $description instructions."
 }
 
 generate_rows_for_family() {
