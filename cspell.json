@@ -29,6 +29,7 @@
     "pytest",
     "querysets",
     "SemVer",
+    "shieldadvanced",
     "SonarQube",
     "teardown",
     "tfvars",

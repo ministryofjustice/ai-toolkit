@@ -1,5 +1,5 @@
 ---
-description: Pull Request Instructions
+description: "Integration Hub Pull Request Instructions. Relevant when creating or updating pull requests on behalf of @ministryofjustice/integration-hub GitHub team members."
 source: https://github.com/ministryofjustice/ai-toolkit/blob/main/toolkits/integration-hub/.apm/instructions/pull-request.instructions.md
 ---
 
