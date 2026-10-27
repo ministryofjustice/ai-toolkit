@@ -34,6 +34,12 @@
       "description": "Integration Hub Engineering Copilot instructions",
       "version": "1.2.0",
       "source": "./toolkits/integration-hub/engineering"
+    },
+    {
+      "name": "ai-enablement-engineering",
+      "description": "AI Enablement Toolkit",
+      "version": "1.0.0",
+      "source": "./toolkits/ai-enablement/engineering"
     }
   ]
 }

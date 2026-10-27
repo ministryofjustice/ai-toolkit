@@ -42,3 +42,8 @@ marketplace:
       description: Integration Hub Engineering Copilot instructions
       source: ./toolkits/integration-hub/engineering
       version: 1.2.0
+
+    - name: ai-enablement-engineering
+      description: AI Enablement Toolkit
+      source: ./toolkits/ai-enablement/engineering
+      version: 1.0.0
