@@ -24,6 +24,8 @@ title_case() {
     for (i = 1; i <= NF; i++) {
       if (tolower($i) == "eucs") {
         $i = "EUCS"
+      } else if (tolower($i) == "ai") {
+        $i = "AI"
       } else {
         $i = toupper(substr($i, 1, 1)) substr($i, 2)
       }

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": "bash ${PLUGIN_ROOT}/.apm/hooks/scripts/ci-watch-after-push.sh",
+        "timeoutSec": 10
+      }
+    ]
+  }
+}
