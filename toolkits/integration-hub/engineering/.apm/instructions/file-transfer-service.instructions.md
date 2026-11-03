@@ -27,8 +27,7 @@ Preserve the chosen AWS components and their responsibility boundaries:
   investigation areas.
 - GuardDuty Malware Protection for S3 supplies malware scan outcomes.
 - Lambda functions manage file movement.
-- DynamoDB records support idempotency,
-  concurrency control and recovery.
+- DynamoDB records support idempotency, concurrency control and recovery.
 - Clean-file dispatch requests configured actions and notifications.
   Separate executors implement delivery patterns through their existing
   EventBridge, SNS, SQS and Lambda arrangements.

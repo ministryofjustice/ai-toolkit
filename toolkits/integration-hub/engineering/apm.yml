@@ -1,6 +1,6 @@
 ---
 name: integration-hub-engineering
-version: 1.2.0
+version: 1.2.1
 description: Engineering Toolkit for the Ministry of Justice Integration Hub team
 author: dms1981
 targets:
