@@ -70,7 +70,7 @@ fi
 # name) even if apm.yml has no matching package, e.g. from a partial run or a
 # manual edit. Checked before any files are mutated so the script stays atomic.
 if ! PACKAGE_NAME="$PACKAGE_NAME" REL_TOOLKIT_DIR="$REL_TOOLKIT_DIR" \
-  python3 - "$MARKETPLACE_JSON" <<'PY'; then
+  python3 - "$MARKETPLACE_JSON" <<'PY'
 import json
 import os
 import sys
@@ -85,6 +85,7 @@ for plugin in data.get("plugins", []):
     if plugin.get("source") == source or plugin.get("name") == name:
         sys.exit(1)
 PY
+then
   echo "A plugin for $REL_TOOLKIT_DIR (or named $PACKAGE_NAME) is already registered in .claude-plugin/marketplace.json" >&2
   exit 1
 fi
