@@ -1,0 +1,17 @@
+sequenceDiagram
+  autonumber
+  actor U as You
+  participant M as mojrepos
+  participant G as GitHub (read-only)
+  participant K as knowcat
+  participant H as Knowledge hub
+
+  U->>M: Ask about repositories
+  M->>M: Detect knowcat and check contract version
+  M->>U: Confirm hub and scope (if not already approved)
+  M->>G: Read listing, metadata, root READMEs
+  G-->>M: Evidence
+  M->>K: Writer-only evidence packet
+  K->>H: Check approval and containment, then write
+  K-->>M: Saved paths and validation result
+  M-->>U: Answer with citations, coverage and what was saved

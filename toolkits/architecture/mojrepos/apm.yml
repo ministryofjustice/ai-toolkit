@@ -1,0 +1,18 @@
+---
+name: architecture-mojrepos
+version: 1.0.0
+description: Mojrepos Toolkit
+author: Architecture
+targets:
+  - copilot
+  - claude
+  - codex
+dependencies:
+  apm: []
+  mcp:
+    - name: github
+      registry: false
+      transport: http
+      url: https://api.githubcopilot.com/mcp/
+includes: auto
+scripts: {}

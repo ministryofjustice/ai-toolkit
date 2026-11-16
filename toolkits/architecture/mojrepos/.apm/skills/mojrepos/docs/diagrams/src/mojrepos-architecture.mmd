@@ -1,0 +1,23 @@
+flowchart LR
+  user(["You"])
+  skill["mojrepos skill<br/>lookup · research · inventory<br/>refresh · capture"]
+  gh[("GitHub<br/>ministryofjustice org<br/>read-only")]
+  tools["gh CLI or<br/>GitHub MCP server"]
+  knowcat["knowcat skill<br/>(optional)"]
+  writer["mojrepos standalone writer<br/>(only without knowcat)"]
+  hub[("Knowledge root<br/>hubs.md + mojrepos kb hub")]
+
+  user -- "question or /mojrepos" --> skill
+  skill -- "reads" --> tools --> gh
+  skill -- "answers from" --> hub
+  skill -- "evidence packet" --> knowcat -- "writes" --> hub
+  skill -. "if knowcat missing" .-> writer -. "writes" .-> hub
+
+  classDef person fill:#1d70b8,stroke:#003078,color:#ffffff
+  classDef skillc fill:#cce2d8,stroke:#00703c,color:#0b0c0c
+  classDef ext fill:#ffffff,stroke:#505a5f,color:#0b0c0c
+  classDef store fill:#f3f2f1,stroke:#505a5f,color:#0b0c0c
+  class user person
+  class skill,knowcat,writer skillc
+  class gh,tools ext
+  class hub store

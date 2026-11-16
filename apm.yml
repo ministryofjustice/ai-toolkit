@@ -42,3 +42,8 @@ marketplace:
       description: Integration Hub Engineering Copilot instructions
       source: ./toolkits/integration-hub/engineering
       version: 1.2.1
+
+    - name: architecture-mojrepos
+      description: Skill to find, research and inventory MOJ and HMPPS GitHub repositories from a local knowledge hub, with a 14-day listing refresh
+      source: ./toolkits/architecture/mojrepos
+      version: 1.0.0
