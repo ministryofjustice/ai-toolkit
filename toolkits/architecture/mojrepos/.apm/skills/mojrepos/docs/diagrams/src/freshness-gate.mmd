@@ -1,0 +1,29 @@
+flowchart TD
+  start(["mojrepos invoked"])
+  due{"Listing older<br/>than 14 days?"}
+  approved{"Standing approval<br/>recorded?"}
+  ask["Ask once for approval<br/>of the exact scope"]
+  choose{"Run in background,<br/>now, or skip?"}
+  fetch["Fetch every page of the<br/>org repository listing"]
+  diff["Compare with saved listing:<br/>new · metadata-changed ·<br/>content-stale · missing"]
+  queue["Queue and prioritise<br/>P1 current request ·<br/>P2 HMPPS · P3 rest of MOJ"]
+  reread["Re-read metadata and<br/>root README for a batch"]
+  save["Save listing, queue,<br/>records and coverage"]
+  answer(["Carry on with<br/>your request"])
+
+  start --> due
+  due -- "No" --> answer
+  due -- "Yes" --> approved
+  approved -- "No" --> ask --> choose
+  approved -- "Yes" --> choose
+  choose -- "Skip" --> answer
+  choose -- "Now or background" --> fetch --> diff --> queue --> reread --> save --> answer
+
+  classDef begin fill:#1d70b8,stroke:#003078,color:#ffffff
+  classDef question fill:#ffffff,stroke:#505a5f,color:#0b0c0c
+  classDef step fill:#f3f2f1,stroke:#505a5f,color:#0b0c0c
+  classDef endc fill:#cce2d8,stroke:#00703c,color:#0b0c0c
+  class start begin
+  class due,approved,choose question
+  class ask,fetch,diff,queue,reread,save step
+  class answer endc

@@ -24,6 +24,7 @@ This section is generated from the `toolkits/` directory by `scripts/update-read
 | Team               | Toolkit                                                             | Contents                                                                                           |
 | ------------------ | ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | Universal          | [universal](toolkits/universal)                                     | Universal instructions.                                                                            |
+| Architecture       | [mojrepos](toolkits/architecture/mojrepos)                          | Architecture mojrepos instructions.                                                                |
 | Data Platform      | [platform-engineering](toolkits/data-platform/platform-engineering) | Data Platform platform engineering instructions.                                                   |
 | Data Platform      | [software-engineering](toolkits/data-platform/software-engineering) | Data Platform software engineering instructions.                                                   |
 | EUCS App Platforms | [documentation](toolkits/eucs-app-platforms/documentation)          | EUCS App Platforms Documentation instructions.                                                     |

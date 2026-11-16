@@ -34,6 +34,12 @@
       "description": "Integration Hub Engineering Copilot instructions",
       "version": "1.2.1",
       "source": "./toolkits/integration-hub/engineering"
+    },
+    {
+      "name": "architecture-mojrepos",
+      "description": "Skill to find, research and inventory MOJ and HMPPS GitHub repositories from a local knowledge hub, with a 14-day listing refresh",
+      "version": "1.0.0",
+      "source": "./toolkits/architecture/mojrepos"
     }
   ]
 }
