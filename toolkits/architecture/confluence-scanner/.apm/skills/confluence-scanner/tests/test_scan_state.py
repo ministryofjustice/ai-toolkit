@@ -1,3 +1,8 @@
+"""Offline tests for scanner checkpoints, coverage and safe local writes."""
+
+# Test names describe each case; one fixture owns the temporary directory.
+# pylint: disable=missing-function-docstring,too-many-public-methods
+
 import contextlib
 import io
 import json
@@ -8,7 +13,7 @@ from pathlib import Path
 from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-import scan_state as scanner
+import scan_state as scanner  # noqa: E402  # pylint: disable=wrong-import-position
 
 SITE = "https://example.atlassian.net"
 
@@ -27,8 +32,10 @@ def metadata(page_id="1", **changes):
 
 
 class ScannerTests(unittest.TestCase):
+    """Exercise scan workflows with synthetic pages and temporary outputs."""
+
     def setUp(self):
-        self.tmp = tempfile.TemporaryDirectory()
+        self.tmp = tempfile.TemporaryDirectory()  # pylint: disable=consider-using-with
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name).resolve()
         self.output = self.root / "index"
@@ -145,7 +152,7 @@ class ScannerTests(unittest.TestCase):
 
     def test_retries_are_bounded(self):
         self.discover()
-        for attempt in range(3):
+        for _ in range(3):
             self.record(
                 body_complete=False,
                 expected_summary_sha256=scanner.digest(self.output / "pages/1.md"),

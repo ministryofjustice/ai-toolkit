@@ -17,15 +17,17 @@ from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 
 
 class ScanError(ValueError):
-    pass
+    """Invalid scanner input or unsafe local state."""
 
 
 def require(condition: bool, message: str) -> None:
+    """Reject invalid input with an explicit scanner error."""
     if not condition:
         raise ScanError(message)
 
 
 def identifier(value: object) -> str:
+    """Validate a numeric page or space ID."""
     require(
         isinstance(value, str) and bool(re.fullmatch(r"[0-9]+", value)),
         "Page and space IDs must be numeric strings.",
@@ -34,6 +36,7 @@ def identifier(value: object) -> str:
 
 
 def site_url(value: str) -> str:
+    """Validate and normalise an HTTPS site origin."""
     parsed = urlsplit(value)
     require(
         parsed.scheme == "https"
@@ -50,6 +53,7 @@ def site_url(value: str) -> str:
 
 
 def safe_url(value: str, base: str) -> str:
+    """Resolve a URL and remove credentials and sensitive query values."""
     parsed = urlsplit(urljoin(base, value.strip()))
     require(
         parsed.scheme in ("https", "http") and bool(parsed.hostname), "Expected an HTTP(S) URL."
@@ -68,14 +72,17 @@ def safe_url(value: str, base: str) -> str:
 
 
 def page_key(site: str, page_id: str) -> str:
+    """Return a site-qualified page identity."""
     return site + "|" + page_id
 
 
 def digest(path: Path) -> Optional[str]:
+    """Hash an existing summary for conflict detection."""
     return hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else None
 
 
 def atomic_write(path: Path, text: str) -> None:
+    """Replace one local file atomically without following symlinks."""
     require(not path.is_symlink(), "Refusing to overwrite a symlink.")
     fd, name = tempfile.mkstemp(prefix=".scanner-", dir=str(path.parent))
     try:
@@ -90,12 +97,15 @@ def atomic_write(path: Path, text: str) -> None:
 
 
 def contained(path: Path, root: Path) -> Path:
+    """Resolve a path and require containment within the approved root."""
     resolved = path.resolve()
     require(resolved == root or root in resolved.parents, "Path escapes the output root.")
     return resolved
 
 
 class Links(HTMLParser):
+    """Collect URL candidates and unresolved Confluence title links."""
+
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.urls: List[str] = []
@@ -122,6 +132,7 @@ class Links(HTMLParser):
 
 
 def extract(body: str, base: str) -> List[dict]:
+    """Extract safe URL candidates without fetching their destinations."""
     parser = Links()
     parser.feed(body)
     parser.close()
@@ -166,6 +177,8 @@ def extract(body: str, base: str) -> List[dict]:
 
 
 class Store:
+    """Manage contained local checkpoints and summary paths."""
+
     def __init__(self, output: Path, knowledge_base: Path) -> None:
         root = knowledge_base.resolve(strict=True)
         self.output = contained(output, root)
@@ -181,6 +194,7 @@ class Store:
 
     @contextmanager
     def locked(self) -> Iterator[None]:
+        """Hold an exclusive advisory lock for one helper command."""
         lock_path = self.directory / "lock"
         require(not lock_path.is_symlink(), "Lock path cannot be a symlink.")
         with lock_path.open("a", encoding="utf-8") as lock:
@@ -194,15 +208,18 @@ class Store:
                 fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
 
     def load(self, scan_id: str) -> dict:
+        """Load a checkpoint only for the expected scan event."""
         require(self.path.is_file(), "No checkpoint: run init first.")
         state = json.loads(self.path.read_text(encoding="utf-8"))
         require(state["scan_id"] == scan_id, "Scan ID mismatch; do not resume another event.")
         return state
 
     def save(self, state: dict) -> None:
+        """Persist the current checkpoint atomically."""
         atomic_write(self.path, json.dumps(state, indent=2, sort_keys=True) + "\n")
 
     def summary_path(self, page: dict) -> Path:
+        """Resolve the contained summary path for a base or linked page."""
         site = urlsplit(page["site"]).hostname
         relative = (
             "pages/" + page["id"] + ".md"
@@ -215,6 +232,7 @@ class Store:
 def new_state(
     scan_id: str, site: str, space_id: str, linked_sites: Optional[List[str]] = None
 ) -> dict:
+    """Create an empty checkpoint for an explicitly approved scan."""
     require(bool(re.fullmatch(r"[A-Za-z0-9_-]+", scan_id)), "Invalid scan ID.")
     return {
         "schema": 1,
@@ -231,6 +249,7 @@ def new_state(
 
 
 def page_metadata(data: dict) -> dict:
+    """Validate source metadata before placing a page in the queue."""
     site = site_url(data["site"])
     page_id = identifier(data["id"])
     require(
@@ -258,6 +277,7 @@ def page_metadata(data: dict) -> dict:
 
 
 def inventory(state: dict, data: dict) -> None:
+    """Merge a discovery batch while validating scope and cursor continuity."""
     require(not state["discovery_complete"], "Discovery already complete.")
     require(data.get("cursor") == state["cursor"], "Unexpected inventory cursor.")
     require(isinstance(data.get("pages"), list), "pages must be a list.")
@@ -294,6 +314,7 @@ def inventory(state: dict, data: dict) -> None:
 
 
 def resolve_link(state: dict, data: dict) -> None:
+    """Record a verified disposition for a link observed on a base page."""
     require(state["discovery_complete"], "Finish base discovery before resolving linked pages.")
     observed_url = (
         data["url"]
@@ -330,6 +351,7 @@ def resolve_link(state: dict, data: dict) -> None:
 
 
 def record(store: Store, state: dict, data: dict) -> None:
+    """Record body-processing evidence and safely update a page summary."""
     require(state["discovery_complete"], "Finish base discovery before processing bodies.")
     key = page_key(site_url(data["site"]), identifier(data["id"]))
     require(key in state["pages"], "Page is not queued.")
@@ -345,7 +367,7 @@ def record(store: Store, state: dict, data: dict) -> None:
         "A substantive agent-written summary or explicit empty-body finding is required.",
     )
     for flag in ("body_complete", "links_complete", "urls_complete"):
-        require(type(data.get(flag)) is bool, "Explicit completeness flags are required.")
+        require(isinstance(data.get(flag), bool), "Explicit completeness flags are required.")
     require(
         isinstance(data.get("gaps"), list) and all(isinstance(g, str) for g in data["gaps"]),
         "gaps must be an explicit list of descriptions.",
@@ -450,6 +472,7 @@ def record(store: Store, state: dict, data: dict) -> None:
 
 
 def counts(state: dict) -> dict:
+    """Calculate queue coverage and completion without inventing successful reads."""
     result: dict = {}
     for depth, name in ((0, "base"), (1, "linked")):
         pages = [p for p in state["pages"].values() if p["depth"] == depth]
@@ -477,10 +500,11 @@ def counts(state: dict) -> dict:
 
 
 def select(store: Store, state: dict, limit: int, retry: bool, max_attempts: int = 3) -> dict:
+    """Select a bounded batch of pending pages and eligible retries."""
     require(1 <= limit <= 100, "Batch limit must be between 1 and 100.")
     require(1 <= max_attempts <= 10, "Maximum attempts must be between 1 and 10.")
     selected = []
-    for key, page in sorted(state["pages"].items(), key=lambda item: (item[1]["depth"], item[0])):
+    for _, page in sorted(state["pages"].items(), key=lambda item: (item[1]["depth"], item[0])):
         retryable = (
             page["status"] == "incomplete"
             or page["status"] == "failed"
@@ -502,6 +526,7 @@ def select(store: Store, state: dict, limit: int, retry: bool, max_attempts: int
 
 
 def report(store: Store, state: dict) -> None:
+    """Write the helper-owned Markdown progress inventory."""
     path = contained(store.directory / "progress.md", store.output)
     marker = "<!-- confluence-scanner batch checkpoint -->"
     require(
@@ -554,7 +579,70 @@ def report(store: Store, state: dict) -> None:
     atomic_write(path, text)
 
 
+def initialize(store: Store, args: argparse.Namespace) -> dict:
+    """Start a scan without replacing an active or unrelated checkpoint."""
+    state = new_state(args.scan_id, args.site, args.space_id, args.linked_site)
+    if store.path.exists():
+        require(
+            args.previous_scan_id is not None,
+            "Checkpoint exists; resume it or supply --previous-scan-id for a new event.",
+        )
+        previous = store.load(args.previous_scan_id)
+        require(previous["scan_id"] != args.scan_id, "New event must have a new scan ID.")
+        require(
+            previous["site"] == state["site"] and previous["space_id"] == state["space_id"],
+            "Cannot change checkpoint space identity.",
+        )
+        for manifest in store.output.glob("*-scanned.md"):
+            text = manifest.read_text(encoding="utf-8")
+            require(
+                "- Latest state: in-progress" not in text
+                or "- Latest scan ID: " + args.scan_id + "\n" in text,
+                "Previous scan is active; explicitly resume it instead.",
+            )
+    store.save(state)
+    return state
+
+
+def mutate(store: Store, state: dict, command: str, data: dict) -> None:
+    """Apply a mutation, checkpointing each successful record in a batch."""
+    require(isinstance(data, dict), "Command input must be a JSON object.")
+    if command == "inventory":
+        inventory(state, data)
+    elif command == "record":
+        rows = data.get("pages", [data])
+        require(
+            isinstance(rows, list) and 1 <= len(rows) <= 100,
+            "Record batch must contain 1 to 100 pages.",
+        )
+        for row in rows:
+            record(store, state, row)
+            store.save(state)
+    elif command == "resolve":
+        resolve_link(state, data)
+    else:
+        key = page_key(site_url(data["site"]), identifier(data["id"]))
+        require(key in state["pages"], "Page is not queued.")
+        require(
+            isinstance(data.get("error"), str) and bool(data["error"].strip()),
+            "A safe, non-sensitive failure reason is required.",
+        )
+        page = state["pages"][key]
+        require(
+            isinstance(data.get("retryable"), bool),
+            "Specify retryable=false for denials/authentication failures.",
+        )
+        page.update(
+            status="failed",
+            attempts=page["attempts"] + 1,
+            error=data["error"],
+            retryable=data["retryable"],
+        )
+    store.save(state)
+
+
 def main(argv: Optional[List[str]] = None) -> int:
+    """Run a local scanner command and report explicit errors to stderr."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--knowledge-base", type=Path, required=True)
@@ -584,68 +672,12 @@ def main(argv: Optional[List[str]] = None) -> int:
         store = Store(args.output, args.knowledge_base)
         with store.locked():
             if args.command == "init":
-                state = new_state(args.scan_id, args.site, args.space_id, args.linked_site)
-                if store.path.exists():
-                    require(
-                        args.previous_scan_id is not None,
-                        "Checkpoint exists; resume it or supply --previous-scan-id for a new event.",
-                    )
-                    previous = store.load(args.previous_scan_id)
-                    require(
-                        previous["scan_id"] != args.scan_id, "New event must have a new scan ID."
-                    )
-                    require(
-                        previous["site"] == state["site"]
-                        and previous["space_id"] == state["space_id"],
-                        "Cannot change checkpoint space identity.",
-                    )
-                    manifests = list(store.output.glob("*-scanned.md"))
-                    for manifest in manifests:
-                        text = manifest.read_text(encoding="utf-8")
-                        require(
-                            "- Latest state: in-progress" not in text
-                            or "- Latest scan ID: " + args.scan_id + "\n" in text,
-                            "Previous scan is active; explicitly resume it instead.",
-                        )
-                store.save(state)
+                state = initialize(store, args)
                 result = counts(state)
             else:
                 state = store.load(args.scan_id)
                 if args.command in ("inventory", "record", "resolve", "fail"):
-                    data = json.load(sys.stdin)
-                    require(isinstance(data, dict), "Command input must be a JSON object.")
-                    if args.command == "inventory":
-                        inventory(state, data)
-                    elif args.command == "record":
-                        rows = data.get("pages", [data])
-                        require(
-                            isinstance(rows, list) and 1 <= len(rows) <= 100,
-                            "Record batch must contain 1 to 100 pages.",
-                        )
-                        for row in rows:
-                            record(store, state, row)
-                            store.save(state)
-                    elif args.command == "resolve":
-                        resolve_link(state, data)
-                    else:
-                        key = page_key(site_url(data["site"]), identifier(data["id"]))
-                        require(key in state["pages"], "Page is not queued.")
-                        require(
-                            isinstance(data.get("error"), str) and bool(data["error"].strip()),
-                            "A safe, non-sensitive failure reason is required.",
-                        )
-                        page = state["pages"][key]
-                        require(
-                            type(data.get("retryable")) is bool,
-                            "Specify retryable=false for denials/authentication failures.",
-                        )
-                        page.update(
-                            status="failed",
-                            attempts=page["attempts"] + 1,
-                            error=data["error"],
-                            retryable=data["retryable"],
-                        )
-                    store.save(state)
+                    mutate(store, state, args.command, json.load(sys.stdin))
                 if args.command == "report":
                     report(store, state)
                 result = (

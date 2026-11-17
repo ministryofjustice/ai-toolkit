@@ -92,11 +92,11 @@ Or copy the folder into your assistant's user skill folder:
 
 ## Dependencies
 
-| Dependency | Required? | Why | Install | Check |
-| --- | --- | --- | --- | --- |
-| Python 3.9 or later | Required | Runs the batch helper (standard library only) | [python.org/downloads](https://www.python.org/downloads/) | `python3 --version` |
+| Dependency           | Required?                  | Why                                                                                                                                                                                                                        | Install                                                                                                                                        | Check                                                 |
+| -------------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| Python 3.9 or later  | Required                   | Runs the batch helper (standard library only)                                                                                                                                                                              | [python.org/downloads](https://www.python.org/downloads/)                                                                                      | `python3 --version`                                   |
 | Atlassian MCP server | Required for live scanning | Rovo is declared in APM; another approved Atlassian MCP server with Confluence read tools can be used instead. Setup guides: [macOS](./references/install-rovo-macos.md), [Windows](./references/install-rovo-windows.md). | [Atlassian Rovo MCP setup](https://support.atlassian.com/atlassian-rovo-mcp-server/docs/getting-started-with-the-atlassian-remote-mcp-server/) | Verify an authenticated, read-only Confluence request |
-| knowcat | Optional | Stores scans inside a knowledge hub and uses them for explanations | Install separately when available | Check your assistant's available skills |
+| knowcat              | Optional                   | Stores scans inside a knowledge hub and uses them for explanations                                                                                                                                                         | Install separately when available                                                                                                              | Check your assistant's available skills               |
 
 APM declares the MCP dependency, but installation does not prove authenticated
 access. Check your assistant's configuration and sign in yourself. The scanner

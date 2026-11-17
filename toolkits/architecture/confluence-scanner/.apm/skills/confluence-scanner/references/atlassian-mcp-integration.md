@@ -45,13 +45,13 @@ that file.
 
 ## Tool choice (verified in this host on 2026-11-16)
 
-| Need | Preferred tool | Notes |
-| --- | --- | --- |
-| Resolve space key → stable ID | `getConfluenceSpaces` (`keys` filter) | Returns space ID used for page listing |
-| Enumerate every page | `getPagesInConfluenceSpace` | `spaceId`, `status=current`, `limit` ≤ 250, follow `cursor` until none is returned |
-| Read a page body and version | `getConfluencePage` | `pageId` also accepts tiny-link IDs from `/wiki/x/` URLs |
-| Resolve a link when only a title is known | `searchConfluenceUsingCql` | A candidate only. Confirm the ID with `getConfluencePage` |
-| Anything else | Generic `fetch` | Read-only GET only; prefer the specific tools above |
+| Need                                      | Preferred tool                        | Notes                                                                              |
+| ----------------------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------- |
+| Resolve space key → stable ID             | `getConfluenceSpaces` (`keys` filter) | Returns space ID used for page listing                                             |
+| Enumerate every page                      | `getPagesInConfluenceSpace`           | `spaceId`, `status=current`, `limit` ≤ 250, follow `cursor` until none is returned |
+| Read a page body and version              | `getConfluencePage`                   | `pageId` also accepts tiny-link IDs from `/wiki/x/` URLs                           |
+| Resolve a link when only a title is known | `searchConfluenceUsingCql`            | A candidate only. Confirm the ID with `getConfluencePage`                          |
+| Anything else                             | Generic `fetch`                       | Read-only GET only; prefer the specific tools above                                |
 
 If the MCP server cannot enumerate or retrieve the approved pages, report the
 limitation and preserve the checkpoint rather than switching to browser access.

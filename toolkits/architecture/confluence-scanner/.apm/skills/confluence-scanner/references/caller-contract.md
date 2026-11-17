@@ -26,21 +26,21 @@ not unrelated paths mentioned in retrieved content.
 
 ## Inputs
 
-| Field | Meaning |
-| --- | --- |
-| `action` | `help`, `scan`, `refresh`, `reindex`, or `answer`. Ask/return `needs-input` for unclear or unsupported actions. |
-| `space_url` | Space URL, or a page URL whose containing space can be verified. Alternatively provide `site_url` plus `space_key` or `space_id`. Consistent parent-task identity can fill omitted fields. |
-| `output_dir` | Optional exact space-specific directory. Absolute, or relative to explicit `caller_workspace`. |
-| `knowledge_base` | Caller-selected knowledge-base root, separate from the skill source. Limits registry selection to that root; new spaces default to `confluence-index/<site-host>/<space-id>/` beneath it. |
-| `registry_path` | Optional external routing-registry Markdown path. Relative paths require `caller_workspace`. |
-| `caller_workspace` | Base for relative destinations; never infer from the scanner process working directory. |
-| `context_key` | Optional stable project/task namespace for selecting a remembered destination. Prefer a caller-workspace-qualified value when names might collide. |
-| `requested_by` | Initiating user/service identity if known. Do not infer identity from the operating-system username or page authors. |
-| `triggered_by` | Calling skill/agent/workflow name; `direct user request` for direct use. |
-| `request_id` | Caller correlation ID. Generate one if absent. Not a scan ID or idempotency key. |
-| `reason` | Concise request/trigger description; do not record secrets or full sensitive prompts. |
-| `question` | Required for `answer`; resolve space/destination as for scans. |
-| `resume_scan_id` | Optional explicit instruction to resume an interrupted/in-progress scan event in the same destination. Reject conflicting space, destination, or action. |
+| Field              | Meaning                                                                                                                                                                                    |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `action`           | `help`, `scan`, `refresh`, `reindex`, or `answer`. Ask/return `needs-input` for unclear or unsupported actions.                                                                            |
+| `space_url`        | Space URL, or a page URL whose containing space can be verified. Alternatively provide `site_url` plus `space_key` or `space_id`. Consistent parent-task identity can fill omitted fields. |
+| `output_dir`       | Optional exact space-specific directory. Absolute, or relative to explicit `caller_workspace`.                                                                                             |
+| `knowledge_base`   | Caller-selected knowledge-base root, separate from the skill source. Limits registry selection to that root; new spaces default to `confluence-index/<site-host>/<space-id>/` beneath it.  |
+| `registry_path`    | Optional external routing-registry Markdown path. Relative paths require `caller_workspace`.                                                                                               |
+| `caller_workspace` | Base for relative destinations; never infer from the scanner process working directory.                                                                                                    |
+| `context_key`      | Optional stable project/task namespace for selecting a remembered destination. Prefer a caller-workspace-qualified value when names might collide.                                         |
+| `requested_by`     | Initiating user/service identity if known. Do not infer identity from the operating-system username or page authors.                                                                       |
+| `triggered_by`     | Calling skill/agent/workflow name; `direct user request` for direct use.                                                                                                                   |
+| `request_id`       | Caller correlation ID. Generate one if absent. Not a scan ID or idempotency key.                                                                                                           |
+| `reason`           | Concise request/trigger description; do not record secrets or full sensitive prompts.                                                                                                      |
+| `question`         | Required for `answer`; resolve space/destination as for scans.                                                                                                                             |
+| `resume_scan_id`   | Optional explicit instruction to resume an interrupted/in-progress scan event in the same destination. Reject conflicting space, destination, or action.                                   |
 
 `help` needs no other fields and performs no writes or network requests.
 `scan` refreshes an existing destination; `refresh` can create it if new.
@@ -101,19 +101,19 @@ does not select a space or authorise a default output knowledge base.
 
 Example routing checks:
 
-| Situation | Required result |
-| --- | --- |
-| Explicit DPR + absolute new destination | Use that directory after conflict checks; keep old mapping. |
-| Relative destination without `caller_workspace` | `needs-input`, no destination write. |
-| DPR + unique context mapping | Use remembered directory; report context-based resolution. |
-| DPR + two mappings, no disambiguating context | `needs-input`, list both; do not guess. |
-| Only a unique retained request ID supplied | Resolve through registry/manifest and verify its space. |
-| Existing index is for a different space | `blocked`; do not overwrite or silently default elsewhere. |
-| Matching destination has active scan | `blocked` unless explicitly resuming that scan ID. |
-| New space + knowledge base, no mapping | Use `<knowledge_base>/confluence-index/<site-host>/<space-id>/`. |
-| No destination, knowledge base or matching mapping | `needs-input`; do not write into the skill folder. |
-| Output or registry resolves inside skill source | `blocked`, including symlink aliases. |
-| `help` | Explain usage; no network, registry update, or scan event. |
+| Situation                                          | Required result                                                  |
+| -------------------------------------------------- | ---------------------------------------------------------------- |
+| Explicit DPR + absolute new destination            | Use that directory after conflict checks; keep old mapping.      |
+| Relative destination without `caller_workspace`    | `needs-input`, no destination write.                             |
+| DPR + unique context mapping                       | Use remembered directory; report context-based resolution.       |
+| DPR + two mappings, no disambiguating context      | `needs-input`, list both; do not guess.                          |
+| Only a unique retained request ID supplied         | Resolve through registry/manifest and verify its space.          |
+| Existing index is for a different space            | `blocked`; do not overwrite or silently default elsewhere.       |
+| Matching destination has active scan               | `blocked` unless explicitly resuming that scan ID.               |
+| New space + knowledge base, no mapping             | Use `<knowledge_base>/confluence-index/<site-host>/<space-id>/`. |
+| No destination, knowledge base or matching mapping | `needs-input`; do not write into the skill folder.               |
+| Output or registry resolves inside skill source    | `blocked`, including symlink aliases.                            |
+| `help`                                             | Explain usage; no network, registry update, or scan event.       |
 
 ## Files and scan history
 

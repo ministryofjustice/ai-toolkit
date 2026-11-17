@@ -1,9 +1,9 @@
 ---
 name: confluence-scanner
-description: 'Scan, index, re-index or refresh a Confluence space with resumable Python batch checkpoints. Resolve space-specific output folders, keep 20 scan-history events, index directly linked Confluence pages one hop away, and list external URLs. Use for large-space scans, resuming pending pages, delegated Confluence scanning, external-link inventories, page summaries, relevance-ranked questions, or explaining the scanner caller contract.'
+description: "Scan, index, re-index or refresh a Confluence space with resumable Python batch checkpoints. Resolve space-specific output folders, keep 20 scan-history events, index directly linked Confluence pages one hop away, and list external URLs. Use for large-space scans, resuming pending pages, delegated Confluence scanning, external-link inventories, page summaries, relevance-ranked questions, or explaining the scanner caller contract."
 license: MIT
 metadata:
-  argument-hint: 'Help, scan, reindex, refresh, or answer; supply a space and knowledge_base or output_dir, or reuse a registered destination'
+  argument-hint: "Help, scan, reindex, refresh, or answer; supply a space and knowledge_base or output_dir, or reuse a registered destination"
 ---
 
 # Confluence Scanner

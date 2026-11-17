@@ -15,9 +15,9 @@ caller contract to resolve the registry and caller-selected knowledge base.
 One row per verified site/space, destination, and caller context. Multiple
 destinations are allowed; never choose between them by recency.
 
-| Site | Space key | Space ID | Context key | Output directory (absolute) | Manifest | Last request ID | Last scan ID | Last outcome | Updated (UTC) |
-|---|---|---|---|---|---|---|---|---|---|
-| <canonical site> | <key> | <id or key fallback> | <caller context or unspecified> | <absolute path> | [Scan metadata](<relative path or absolute local path>) | <request ID> | <scan ID> | <state> | <UTC> |
+| Site             | Space key | Space ID             | Context key                     | Output directory (absolute) | Manifest                                                | Last request ID | Last scan ID | Last outcome | Updated (UTC) |
+| ---------------- | --------- | -------------------- | ------------------------------- | --------------------------- | ------------------------------------------------------- | --------------- | ------------ | ------------ | ------------- |
+| <canonical site> | <key>     | <id or key fallback> | <caller context or unspecified> | <absolute path>             | [Scan metadata](<relative path or absolute local path>) | <request ID>    | <scan ID>    | <state>      | <UTC>         |
 ```
 
 Preserve unrelated rows. Links to destinations outside the registry directory may
@@ -115,36 +115,37 @@ If an attempt fails before discovery, its unmeasured counts are unknown, not zer
 
 <Discovery method, failures, inaccessible content, missing sections, and caveats.
 For each of the base and linked sets, discovered = successful + failed/incomplete
-+ pending. Known body gaps and outline-only summaries count as incomplete even
-when a partial summary exists. Unresolved target identities are separate from
-page counts; aliases resolving to the same site/page ID count once.>
+
+- pending. Known body gaps and outline-only summaries count as incomplete even
+  when a partial summary exists. Unresolved target identities are separate from
+  page counts; aliases resolving to the same site/page ID count once.>
 
 ## Base pages (depth zero)
 
-| Page ID | Title / source | Parent ID | Summary | Topics / search terms | Version | Source modified (UTC) | Retrieved (UTC) | Status | Local summary |
-|---|---|---|---|---|---|---|---|---|---|
-| <id> | [<title>](<Confluence URL>) | <id or unknown> | <1-3 sentences> | <terms> | <version or unknown> | <time or unknown> | <time or never> | <summarised / unchanged / pending / incomplete / failed / stale / not observed> | [Summary](./pages/<id>.md) |
+| Page ID | Title / source              | Parent ID       | Summary         | Topics / search terms | Version              | Source modified (UTC) | Retrieved (UTC) | Status                                                                          | Local summary              |
+| ------- | --------------------------- | --------------- | --------------- | --------------------- | -------------------- | --------------------- | --------------- | ------------------------------------------------------------------------------- | -------------------------- |
+| <id>    | [<title>](<Confluence URL>) | <id or unknown> | <1-3 sentences> | <terms>               | <version or unknown> | <time or unknown>     | <time or never> | <summarised / unchanged / pending / incomplete / failed / stale / not observed> | [Summary](./pages/<id>.md) |
 
 ## Linked pages (depth one only)
 
-| Site | Page ID | Source space | Title / source | Referring base IDs | Summary / topics | Version | Source modified (UTC) | Retrieved (UTC) | Status | Local summary |
-|---|---|---|---|---|---|---|---|---|---|---|
-| <site> | <id> | <key / ID> | [<title>](<canonical URL>) | <base IDs> | <summary / topics> | <version or unknown> | <time or unknown> | <time or never> | <status> | [Summary](./linked-pages/<site-host>/<id>.md) |
+| Site   | Page ID | Source space | Title / source             | Referring base IDs | Summary / topics   | Version              | Source modified (UTC) | Retrieved (UTC) | Status   | Local summary                                 |
+| ------ | ------- | ------------ | -------------------------- | ------------------ | ------------------ | -------------------- | --------------------- | --------------- | -------- | --------------------------------------------- |
+| <site> | <id>    | <key / ID>   | [<title>](<canonical URL>) | <base IDs>         | <summary / topics> | <version or unknown> | <time or unknown>     | <time or never> | <status> | [Summary](./linked-pages/<site-host>/<id>.md) |
 
 ## Base-page link inventory
 
 Complete eligible link sets, not just selected related links. Include links that
 resolve to other base pages (depth zero); they are not extra linked-page counts.
 
-| Referring base ID | Safe source link | Resolved site / page ID | Target depth | Disposition / reason |
-|---|---|---|---|---|
-| <base ID> | [<label>](<URL without secrets>) | <site / ID or unresolved> | <0 / 1 / unknown / excluded> | <indexed / pending / restricted / unresolved / excluded with reason> |
+| Referring base ID | Safe source link                 | Resolved site / page ID   | Target depth                 | Disposition / reason                                                 |
+| ----------------- | -------------------------------- | ------------------------- | ---------------------------- | -------------------------------------------------------------------- |
+| <base ID>         | [<label>](<URL without secrets>) | <site / ID or unresolved> | <0 / 1 / unknown / excluded> | <indexed / pending / restricted / unresolved / excluded with reason> |
 
 ## Errors and outstanding work
 
-| Page ID or discovery step | Problem | Last attempt (UTC) | Next action |
-|---|---|---|---|
-| <id or step> | <specific reason, no secrets> | <time> | <retry / authenticate / clarify> |
+| Page ID or discovery step | Problem                       | Last attempt (UTC) | Next action                      |
+| ------------------------- | ----------------------------- | ------------------ | -------------------------------- |
+| <id or step>              | <specific reason, no secrets> | <time>             | <retry / authenticate / clarify> |
 ```
 
 For pages never successfully read, use plain text `Not available` rather than a
@@ -170,21 +171,21 @@ was not observed, so coverage totals stay unambiguous.
 
 ## Current external URLs
 
-| URL | Host | Referring base pages | Labels / occurrence types | Observed fragment variants (safe) | Extracted (UTC) |
-|---|---|---|---|---|---|
-| [<safe URL>](<safe URL>) | <host> | [<page title / ID>](<Confluence source URL>), ... | <labels; hyperlink / plain text / embed> | <fragments or none> | <UTC> |
+| URL                      | Host   | Referring base pages                              | Labels / occurrence types                | Observed fragment variants (safe) | Extracted (UTC) |
+| ------------------------ | ------ | ------------------------------------------------- | ---------------------------------------- | --------------------------------- | --------------- |
+| [<safe URL>](<safe URL>) | <host> | [<page title / ID>](<Confluence source URL>), ... | <labels; hyperlink / plain text / embed> | <fragments or none>               | <UTC>           |
 
 ## Per-base-page extraction sets
 
-| Base page / source | Version | Extracted (UTC) | Extraction status | Complete safe URL set | Gaps |
-|---|---|---|---|---|---|
-| [<title / ID>](<source URL>) | <version or unknown> | <UTC or never> | <complete / incomplete / failed / pending> | <all safe URL keys, or none observed> | <reason or none observed> |
+| Base page / source           | Version              | Extracted (UTC) | Extraction status                          | Complete safe URL set                 | Gaps                      |
+| ---------------------------- | -------------------- | --------------- | ------------------------------------------ | ------------------------------------- | ------------------------- |
+| [<title / ID>](<source URL>) | <version or unknown> | <UTC or never>  | <complete / incomplete / failed / pending> | <all safe URL keys, or none observed> | <reason or none observed> |
 
 ## Redacted, unresolved, or stale observations
 
-| Safe candidate (plain text if redacted/unresolved) | Referring base pages | Status | Reason |
-|---|---|---|---|
-| <sanitised candidate, never raw credentials or signatures> | <source IDs/links> | <redacted / unresolved / stale> | <specific reason> |
+| Safe candidate (plain text if redacted/unresolved)         | Referring base pages | Status                          | Reason            |
+| ---------------------------------------------------------- | -------------------- | ------------------------------- | ----------------- |
+| <sanitised candidate, never raw credentials or signatures> | <source IDs/links>   | <redacted / unresolved / stale> | <specific reason> |
 
 ## Coverage limitations
 

@@ -33,6 +33,7 @@ Server URL: `https://mcp.atlassian.com/v2/mcp`
    ```
 
    This adds the server to `~/.copilot/mcp-config.json`.
+
 2. Start a new `copilot` session. When the Atlassian server first connects, a
    browser window opens for Atlassian sign-in. Approve the requested access.
    If no window opens, run `/mcp` in the session to check the server's status
@@ -60,12 +61,12 @@ your spaces means the scanner can use it.
 
 ## If it doesn't work
 
-| Symptom | Fix |
-| --- | --- |
-| No Atlassian tools in the session | Start a new session; check `copilot mcp get atlassian` or the Visual Studio Code MCP server list |
-| Access denied | Confirm you can open the space in Confluence; ask your site admin |
-| Empty or partial results, or silent failures | The sign-in expired. Sign in again (`/mcp` in Copilot CLI) and check the scopes you approve |
-| Sign-in loops or redirect errors | Allow pop-ups. If your setup uses the `mcp-remote` proxy, allow `http://localhost:3334` in the browser and firewall |
+| Symptom                                      | Fix                                                                                                                 |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| No Atlassian tools in the session            | Start a new session; check `copilot mcp get atlassian` or the Visual Studio Code MCP server list                    |
+| Access denied                                | Confirm you can open the space in Confluence; ask your site admin                                                   |
+| Empty or partial results, or silent failures | The sign-in expired. Sign in again (`/mcp` in Copilot CLI) and check the scopes you approve                         |
+| Sign-in loops or redirect errors             | Allow pop-ups. If your setup uses the `mcp-remote` proxy, allow `http://localhost:3334` in the browser and firewall |
 
 Never paste API tokens into chat, or put them in workspace, `.vscode/` or
 knowledge-base files.

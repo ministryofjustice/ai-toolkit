@@ -1,6 +1,6 @@
 ---
 name: confluence-scanner
-description: 'Delegate Confluence space scanning, indexing, re-indexing and refreshes here. Saves caller-directed Markdown indexes and external-URL inventories, tracks space destinations and 20 scan-history events, includes directly linked pages one hop away, and explains its caller contract on request. Uses Atlassian MCP for API-backed Confluence access.'
+description: "Delegate Confluence space scanning, indexing, re-indexing and refreshes here. Saves caller-directed Markdown indexes and external-URL inventories, tracks space destinations and 20 scan-history events, includes directly linked pages one hop away, and explains its caller contract on request. Uses Atlassian MCP for API-backed Confluence access."
 user-invocable: true
 disable-model-invocation: false
 ---
@@ -46,35 +46,35 @@ parent. Do not spawn other agents or scan unrelated spaces.
 6. **For scan/refresh/reindex requests**, follow the skill workflow:
 
    a. **Establish identity** – Confirm site, space key, space ID, and title using
-      Atlassian MCP's `getConfluenceSpaces` tool (preferred) or by inferring from
-      authenticated Confluence access. Resolve output routing per caller contract.
-      Create scan event and manifest file.
+   Atlassian MCP's `getConfluenceSpaces` tool (preferred) or by inferring from
+   authenticated Confluence access. Resolve output routing per caller contract.
+   Create scan event and manifest file.
 
    b. **Enumerate pages** – Use Atlassian MCP `getPagesInConfluenceSpace` with
-      pagination to discover all pages in the target space. Persist inventory
-      batches using the [Python batch workflow](../../references/python-batches.md)
-      and `scan_state.py` checkpoint helper. Follow every cursor to completion.
+   pagination to discover all pages in the target space. Persist inventory
+   batches using the [Python batch workflow](../../references/python-batches.md)
+   and `scan_state.py` checkpoint helper. Follow every cursor to completion.
 
    c. **Fetch page bodies** – For each enumerated page ID, use `getConfluencePage`
-      with a supported HTML or ADF body format to retrieve content for link extraction and
-      summarization. Process in bounded batches to respect rate limits.
+   with a supported HTML or ADF body format to retrieve content for link extraction and
+   summarization. Process in bounded batches to respect rate limits.
 
    d. **Extract links locally** – Pass fetched page bodies to `scan_state.py`
-      (offline, no network). It extracts links and validates they are current
-      Confluence pages. Register depth-one linked targets in the index.
+   (offline, no network). It extracts links and validates they are current
+   Confluence pages. Register depth-one linked targets in the index.
 
    e. **Inventory external URLs** – Also via `scan_state.py` local processing.
-      Write `external-urls.md` listing all non-Confluence web URLs found in
-      base-space pages, with provenance and redacted sensitive query parameters.
+   Write `external-urls.md` listing all non-Confluence web URLs found in
+   base-space pages, with provenance and redacted sensitive query parameters.
 
    f. **Generate summaries** – Summarize each page in original wording. Use
-      AI to create substantive summaries; do not just copy page text. Store
-      as Markdown in the output directory.
+   AI to create substantive summaries; do not just copy page text. Store
+   as Markdown in the output directory.
 
    g. **Checkpoint progress** – Update scan event, persist batches, and track
-      completion. On budget limits or blockers, save pending IDs and resumption
-      steps. Preserve progress across invocations using the Python checkpoint
-      helper and local registry.
+   completion. On budget limits or blockers, save pending IDs and resumption
+   steps. Preserve progress across invocations using the Python checkpoint
+   helper and local registry.
 
 7. **Handle tool availability** – Prefer Atlassian MCP for all operations:
    - If MCP tools are available: Use them for fast, reliable API access
