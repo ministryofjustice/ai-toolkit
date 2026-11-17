@@ -42,3 +42,8 @@ marketplace:
       description: Integration Hub Engineering Copilot instructions
       source: ./toolkits/integration-hub/engineering
       version: 1.2.1
+
+    - name: architecture-confluence-scanner
+      description: Architecture Confluence Scanner Copilot instructions
+      source: ./toolkits/architecture/confluence-scanner
+      version: 1.0.0
