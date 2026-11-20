@@ -18,7 +18,7 @@ applyTo: "**/*.java,**/*openapi*.yml,**/*openapi*.yaml,**/*openapi*.json,**/open
 ## Validation and Responses
 
 - Validate external request models at entry points using Jakarta Bean Validation and contract-defined constraints.
-- Keep cross-field and business-rule validation in the service/domain layer.
+- Limit request-boundary validation to shape, type and field constraints. Keep cross-field and business-rule validation in the layer that owns the rule: the service layer by default, or the aggregate or decider in event-sourced services.
 - Return contract-defined status codes, headers, response models and errors without exposing internal implementation details.
 - Bound growing collection reads with contract-defined pagination.
 - Cover changed contracts with tests, including malformed requests, validation failures, negative authorisation scenarios and status/header/error behaviour where relevant.

@@ -13,7 +13,7 @@ applyTo: "**/*.java,**/application*.yml,**/application*.yaml,**/application*.pro
 - Start new Java APIs from `ministryofjustice/laa-spring-boot-microservice-template` and use its initialisation tooling.
 - In template-based services, keep API contracts and generated models in the API module and the executable application in the service module. Keep `bootJar` and `bootRun` disabled for the API module.
 - Use valid Java packages beneath `uk.gov.justice.laa.<service>` for new services rather than copying kebab-case repository names into packages.
-- Keep HTTP translation in controllers, use cases and business rules in services, persistence in repositories, and representation conversion in mappers.
+- Keep HTTP translation in controllers and representation conversion in mappers. By default, keep use cases and business rules in services and persistence in repositories. Where a service has an established alternative architecture, such as CQRS or event sourcing, follow its structure instead. Do not move business decisions into controllers or infrastructure code.
 - Use constructor injection and final dependencies; follow the repository's use of explicit constructors or Lombok `@RequiredArgsConstructor`.
 - Replace template examples, placeholders, demo data and configuration before release. Complete the service readme, CODEOWNERS and deployment configuration.
 

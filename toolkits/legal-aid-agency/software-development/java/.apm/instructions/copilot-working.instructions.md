@@ -12,6 +12,7 @@ applyTo: "**"
 - Identify affected modules, API contracts, dependencies and established patterns. Check which optional technologies are actually used before applying their guidance.
 - Use the repository's declared Java toolchain, Spring Boot compatibility line and plugin versions; do not assume it follows the latest template.
 - Apply mandatory security controls throughout. Use the technology defaults in this package for new services; preserve established choices in existing applications unless changing them is part of the task.
+- Where repository architecture guidance or a more specific toolkit also applies, it takes precedence over the general conventions in this package. Mandatory security controls and LAA-mandated standards, such as the shared base container images, still apply.
 - If an explicit requirement conflicts with repository conventions or these instructions, explain the conflict and seek clarification before making a potentially breaking change.
 - Prefer LAA libraries, starters and convention plugins (typically `laa-` prefixed), then dependencies already used in the repository or the LAA microservice template, before introducing alternatives. There is no fixed approved list; when a new dependency is needed, choose a well-maintained option consistent with these, explain why existing choices are insufficient and flag it for maintainer review.
 
