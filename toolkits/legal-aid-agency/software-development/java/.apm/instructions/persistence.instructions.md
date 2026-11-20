@@ -18,7 +18,12 @@ applyTo: "**/*.java,**/db/migration/**,**/application*.yml,**/application*.yaml,
 - Keep persistence entities separate from external API models and map entities rather than serialising persistence graphs.
 - Use bound parameters or parameterised queries; never concatenate external values into SQL. Allowlist dynamic identifiers that cannot be bound.
 - Treat SQL scanning as supplementary detection, not a substitute for parameterisation or validation.
-- Put Spring `@Transactional` boundaries around coherent operations that own a single consistency boundary, including multi-step writes within it. Do not widen a transaction to make writes across separate consistency boundaries atomic unless the repository documents that choice. In event-sourced services, follow the documented command and unit-of-work boundaries. Check proxy invocation and rollback semantics so the intended transaction actually applies.
+- Put Spring `@Transactional` boundaries around coherent operations that own a single
+  consistency boundary, including multi-step writes within it. Do not widen a
+  transaction to make writes across separate consistency boundaries atomic unless the
+  repository documents that choice. In event-sourced services, follow the documented
+  command and unit-of-work boundaries. Check proxy invocation and rollback semantics
+  so the intended transaction actually applies.
 - Avoid holding database transactions across slow external calls; define consistency and recovery behaviour where a use case spans a database and another system.
 - Review query counts and fetch behaviour to avoid N+1 queries.
 
