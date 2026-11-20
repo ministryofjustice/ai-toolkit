@@ -9,6 +9,7 @@ applyTo: "**/*.java,**/application*.yml,**/application*.yaml,**/application*.pro
 ## Scope and Application Structure
 
 - Apply this guidance only to modules using Spring Boot. Follow established architecture in existing services rather than introducing template layers automatically.
+- Prefer Spring Boot's built-in features, starters and auto-configuration over custom equivalents. Override defaults only for a demonstrated requirement, while preserving required security controls and established behaviour.
 - Start new Java APIs from `ministryofjustice/laa-spring-boot-microservice-template` and use its initialisation tooling.
 - In template-based services, keep API contracts and generated models in the API module and the executable application in the service module. Keep `bootJar` and `bootRun` disabled for the API module.
 - Use valid Java packages beneath `uk.gov.justice.laa.<service>` for new services rather than copying kebab-case repository names into packages.

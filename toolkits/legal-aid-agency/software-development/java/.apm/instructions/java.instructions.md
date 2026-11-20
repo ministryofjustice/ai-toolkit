@@ -28,7 +28,7 @@ applyTo: "**/*.java,**/*.gradle,**/*.gradle.kts,**/gradle.properties,**/gradle-w
 - Document temporary dependency overrides with their reason and removal condition; remove them once dependency management supplies the required version.
 - Keep Gradle toolchains, CI JDKs and container runtimes compatible.
 - Keep Spring Boot 3/Jackson 2 and Spring Boot 4/Jackson 3 compatibility lines separate, including common starters and generator configuration.
-- Keep dependencies minimal, patched and covered by automated update checks.
+- Keep dependencies minimal, patched and covered by automated update checks. Before adding a library, check whether the JDK or the framework already in use meets the need.
 
 ## Code Style and Formatting
 
