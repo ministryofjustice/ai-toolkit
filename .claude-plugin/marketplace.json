@@ -8,7 +8,7 @@
     {
       "name": "universal",
       "description": "Universal Copilot instructions for all Ministry of Justice repositories",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "source": "./toolkits/universal"
     },
     {
@@ -28,6 +28,12 @@
       "description": "Copilot skills for generating project documentation",
       "version": "1.0.0",
       "source": "./toolkits/eucs-app-platforms/documentation"
+    },
+    {
+      "name": "integration-hub-engineering",
+      "description": "Integration Hub Engineering Copilot instructions",
+      "version": "1.2.1",
+      "source": "./toolkits/integration-hub/engineering"
     },
     {
       "name": "legal-aid-agency-software-development-java",

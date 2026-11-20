@@ -21,13 +21,14 @@ This section is generated from the `toolkits/` directory by `scripts/update-read
 
 <!-- BEGIN GENERATED TOOLKITS -->
 
-| Team               | Toolkit                                                                          | Contents                                                 |
-| ------------------ | -------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| Universal          | [universal](toolkits/universal)                                                  | Universal instructions.                                  |
-| Data Platform      | [platform-engineering](toolkits/data-platform/platform-engineering)              | Data Platform platform engineering instructions.         |
-| Data Platform      | [software-engineering](toolkits/data-platform/software-engineering)              | Data Platform software engineering instructions.         |
-| EUCS App Platforms | [documentation](toolkits/eucs-app-platforms/documentation)                       | EUCS App Platforms Documentation instructions.           |
-| Legal Aid Agency   | [software-development/Java](toolkits/legal-aid-agency/software-development/java) | Legal Aid Agency Java Software Development instructions. |
+| Team               | Toolkit                                                                          | Contents                                                                                           |
+| ------------------ | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Universal          | [universal](toolkits/universal)                                                  | Universal instructions.                                                                            |
+| Data Platform      | [platform-engineering](toolkits/data-platform/platform-engineering)              | Data Platform platform engineering instructions.                                                   |
+| Data Platform      | [software-engineering](toolkits/data-platform/software-engineering)              | Data Platform software engineering instructions.                                                   |
+| EUCS App Platforms | [documentation](toolkits/eucs-app-platforms/documentation)                       | EUCS App Platforms Documentation instructions.                                                     |
+| Integration Hub    | [engineering](toolkits/integration-hub/engineering)                              | Integration Hub engineering toolkit for the Ministry of Justice integration hub team instructions. |
+| Legal Aid Agency   | [software-development/Java](toolkits/legal-aid-agency/software-development/java) | Legal Aid Agency Java Software Development instructions.                                           |
 
 <!-- END GENERATED TOOLKITS -->
 
@@ -62,6 +63,11 @@ To update an existing toolkit:
 1. Run `apm pack --check-versions --check-clean` to validate the marketplace and
    regenerate [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json).
 1. Commit the toolkit changes, both manifests, and the generated marketplace file.
+
+CI checks that changed toolkits have a version bump and that each toolkit's
+version matches its entries in the root `apm.yml` and `marketplace.json`.
+The **Marketplace sync** check fails and annotates the pull request if these
+versions differ, even when both catalogue entries contain the same stale version.
 
 ## Setup Instructions
 

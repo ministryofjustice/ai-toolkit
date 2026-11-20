@@ -21,7 +21,7 @@ marketplace:
     - name: universal
       description: Universal Copilot instructions for all Ministry of Justice repositories
       source: ./toolkits/universal
-      version: 1.1.0
+      version: 1.2.0
 
     - name: data-platform-platform-engineering
       description: Data Platform platform engineering Copilot instructions and prompts
@@ -37,6 +37,11 @@ marketplace:
       description: Copilot skills for generating project documentation
       source: ./toolkits/eucs-app-platforms/documentation
       version: 1.0.0
+
+    - name: integration-hub-engineering
+      description: Integration Hub Engineering Copilot instructions
+      source: ./toolkits/integration-hub/engineering
+      version: 1.2.1
 
     - name: legal-aid-agency-software-development-java
       description: Legal Aid Agency Java software development Copilot instructions
