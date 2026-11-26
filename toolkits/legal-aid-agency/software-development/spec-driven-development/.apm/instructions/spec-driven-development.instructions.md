@@ -11,6 +11,11 @@ When designing, implementing or testing a Forge UI journey, load the
 Use project context and repository evidence to establish whether Forge is in
 use; do not assume it is present because this package is installed.
 
+When designing or implementing UI views, components or journeys, including
+Forge, or creating specifications or tickets for UI implementation, load the
+`gds` skill alongside the active workflow and check for relevant GOV.UK Design
+System patterns and components.
+
 Do not consider a ticket complete until the project's applicable linting and
 testing tools have passed. Fix failures caused by or directly related to the
 ticket. Report unrelated pre-existing failures as blockers rather than marking
