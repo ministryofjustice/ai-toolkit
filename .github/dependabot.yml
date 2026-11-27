@@ -21,12 +21,13 @@ updates:
     cooldown:
       default-days: 7
       exclude:
-        - "ministryofjustice/action*"
-        - "ministryofjustice/data-platform-github-actions*"
+        - "ministryofjustice/actions/*"
+        - "ministryofjustice/data-platform-github-actions/*"
     directory: "/"
     groups:
       data-platform-github-actions:
         patterns:
+          - "ministryofjustice/actions/*"
           - "ministryofjustice/data-platform-github-actions*"
     open-pull-requests-limit: 15
     schedule:

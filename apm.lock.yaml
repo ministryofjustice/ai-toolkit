@@ -1,6 +1,8 @@
-lockfile_version: '1'
-generated_at: '2026-10-23T16:11:48.545854+00:00'
-apm_version: 0.28.0
+lockfile_version: '4'
+generated_at: '2026-11-27T16:49:03.260802+00:00'
+apm_version: 0.39.1
+manifest_targets:
+- copilot
 dependencies:
 - repo_url: ministryofjustice/ai-toolkit
   name: universal
@@ -23,7 +25,13 @@ dependencies:
     .github/instructions/markdown.instructions.md: sha256:d5057e0e1ae513ab1b697d80ab108bb9a5e37b4ff6d09799533f1174d36039dc
     .github/instructions/ministryofjustice.instructions.md: sha256:e5f98f5dae901db79b6a869826fb40fcc051fe1ddd057e5fd4dc8d7822e1e652
     .github/instructions/pull-request.instructions.md: sha256:8d63cbc3ef8026a960dd0c68bcd66a3ea2c6aa8e3438c4fd429e51d70df65e18
-  content_hash: sha256:cfeeb054d0f5e3347d289299d8ed91d6f4f818df77ae7544216b1295d41345ab
+  content_hash: sha256:321923844c347bffbfd2ad5869f70a8e4ec8c3df81de723d8ca685aec033c72a
+  package_targets:
+  - copilot
+  carried_licenses:
+  - path: LICENSE
+    source: LICENSE
+    hash: sha256:b16e3474cad3f39d1749519d121848b95650feb3f38f310da248218c8eacbac6
 deployments:
 - kind: project-relative
   target: copilot
@@ -70,6 +78,15 @@ deployments:
   - ministryofjustice/ai-toolkit/toolkits/universal
   active_owner: ministryofjustice/ai-toolkit/toolkits/universal
   content_hash: sha256:8d63cbc3ef8026a960dd0c68bcd66a3ea2c6aa8e3438c4fd429e51d70df65e18
+- kind: uri
+  target: mcp
+  value: github
+  runtime: copilot
+  scope: project
+  owners:
+  - .
+  active_owner: .
+  content_hash: sha256:7b760b8dd3e9eae1fd28fb452aa9b1adb326ce4a55ed4e192d3beb31d56528bd
 mcp_servers:
 - github
 mcp_configs:
@@ -78,5 +95,8 @@ mcp_configs:
     transport: http
     registry: false
     url: https://api.githubcopilot.com/mcp/
+mcp_target_servers:
+  copilot:
+  - github
 mcp_config_provenance:
   github: universal

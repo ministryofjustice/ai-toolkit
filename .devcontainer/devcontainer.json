@@ -2,9 +2,10 @@
   "name": "ai-toolkit",
   "image": "ghcr.io/ministryofjustice/devcontainer-base:latest",
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:": {},
-    "ghcr.io/ministryofjustice/devcontainer-feature/apm:": {},
-    "ghcr.io/ministryofjustice/devcontainer-feature/astral:": {}
+    "ghcr.io/devcontainers/features/copilot-cli:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/ministryofjustice/devcontainer-feature/apm:1": {},
+    "ghcr.io/ministryofjustice/devcontainer-feature/astral:1": {}
   },
   "customizations": {
     "vscode": {
